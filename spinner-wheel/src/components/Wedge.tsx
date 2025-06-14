@@ -2,34 +2,52 @@ import React from 'react';
 
 interface WedgeProps {
   label: string,
-  angle?: number,
-  size: number,
+  angle: number,
+  wedgeX: number,
+  wedgeY: number,
 }
 
 const Wedge = ({...props}: WedgeProps) => {
 
   return (
-    <div
-      style={{
-        backgroundColor: 'gray',
-        width: '50%',
-        // width: 'calc(50% - 2rem)',
-        height: `${props.size}%`,
-        boxSizing: 'border-box',          
-        transform: `rotate(${props.angle}deg)`,                      
-        // transform: `rotate(${props.angle}deg) translateX(2rem)`,
-        transformOrigin: 'left',
-        position: 'absolute',
-        border: '1rem solid black',
-        top: `calc(50% - ${props.size / 2}%)`,
-        left: '50%',
-        textAlign: 'right',
-        alignContent: 'center',
-        paddingRight: '1rem',
-        clipPath: 'polygon(100% 0, 100% 100%, 0 50%)',
+    <>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',      
+          transform: `rotate(${props.angle}deg)`,
+          position: 'absolute',
+      }}>
+      
+      <svg width='100%' height='100%' viewBox='0 0 10 10'>
+        <path
+          d={`M 5 5
+            l ${props.wedgeX} ${props.wedgeY}
+            a 4.5 4.5 0 0 0 0 ${props.wedgeY * -2}
+            Z`}
+          fill='blue' stroke='black' strokeWidth={'0.05'}
+          />
+        </svg>
+      </div>
+      <div
+        style={{
+          width: '50%',
+          height: '100%',
+          transform: `rotate(${props.angle}deg)`,
+          transformOrigin: 'left',
+          boxSizing: 'border-box',
+          position: 'absolute',
+          left: '50%',
+          textAlign: 'right',
+          fontSize: '150%',
+          alignContent: 'center',
+          paddingRight: '2rem',
+          // textOrientation: 'upright',
+          // writingMode: 'vertical-lr',
       }}>
       {props.label}
-    </div>
+      </div>
+    </>
   );
 };
 
