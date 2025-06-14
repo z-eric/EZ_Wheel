@@ -3,6 +3,7 @@ import React from 'react';
 interface WedgeProps {
   label: string,
   angle?: number,
+  size: number,
 }
 
 const Wedge = ({...props}: WedgeProps) => {
@@ -11,25 +12,20 @@ const Wedge = ({...props}: WedgeProps) => {
     <div
       style={{
         backgroundColor: 'gray',
-        width: 'calc(50% - 2rem)',
-        height: '2rem',
-        boxSizing: 'border-box',
-        transform: `rotate(${props.angle}deg) translateX(2rem)`,
+        width: '50%',
+        // width: 'calc(50% - 2rem)',
+        height: `${props.size}%`,
+        boxSizing: 'border-box',          
+        transform: `rotate(${props.angle}deg)`,                      
+        // transform: `rotate(${props.angle}deg) translateX(2rem)`,
         transformOrigin: 'left',
         position: 'absolute',
-        
-        top: 'calc(50% - 1rem)',
+        border: '1rem solid black',
+        top: `calc(50% - ${props.size / 2}%)`,
         left: '50%',
         textAlign: 'right',
         alignContent: 'center',
         paddingRight: '1rem',
-        // writingMode: 'vertical-rl',
-        // textOrientation: 'upright',
-        // width: '0',
-        // height: '0',
-        // borderBottom: '25px solid transparent',
-        // borderRight: '10rem solid #555',
-        // borderTop: '25px solid transparent',
         clipPath: 'polygon(100% 0, 100% 100%, 0 50%)',
       }}>
       {props.label}
