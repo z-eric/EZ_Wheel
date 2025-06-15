@@ -1,48 +1,22 @@
 import React from 'react';
 import Wedge from './Wedge';
+import { WheelOption } from './MainPanel'
 
-let labelData = [
-  {
-    name: '👺',
-    value: 3,
-  },
-  {
-    name: '🤗',
-    value: 3,
-  },
-  {
-    name: '3️⃣',
-    value: 10,
-  },
-  {
-    name: '💀',
-    value: 3,
-  },
-  {
-    name: '🟩',
-    value: 3,
-  },
-  {
-    name: '------',
-    value: 10,
-  },
-  {
-    name: 'Hello',
-    value: 3,
-  },
-];
+interface WheelProps {
+  wheelData: WheelOption[],
+}
 
 let wedgePattern: number[] = [];
 
-const calcWedgePattern = () => {
+const calcWedgePattern = (wheelData : WheelOption[]) => {
   console.clear();
   
   let totalWedges = 0; // The weights of all options added together.
   let maxDepth = 0; // The highest weight.
-  for (let i = 0; i < labelData.length; i++){
-    totalWedges += labelData[i].value;
-    if (labelData[i].value > maxDepth)
-      maxDepth = labelData[i].value;
+  for (let i = 0; i < wheelData.length; i++){
+    totalWedges += wheelData[i].value;
+    if (wheelData[i].value > maxDepth)
+      maxDepth = wheelData[i].value;
   }
 
   console.log('totalWedges ' + totalWedges + ' maxDepth ' + maxDepth);
@@ -52,13 +26,13 @@ const calcWedgePattern = () => {
     assigning any option a second wedge. Then any wedges that get a second
     before any get a third, etc. */
   for (let depth = 1; depth <= maxDepth; depth++){
-    for (let i = 0; i < labelData.length; i++){
+    for (let i = 0; i < wheelData.length; i++){
 
       // Determine if the option has a weight this deep.
-      if (labelData[i].value >= depth) {
-        let wedgesWithThisLabel = labelData[i].value;
+      if (wheelData[i].value >= depth) {
+        let wedgesWithThisLabel = wheelData[i].value;
         // Stagger the starting point according to how many options there are.
-        let fractionalStart = Math.floor(totalWedges / labelData.length * i);
+        let fractionalStart = Math.floor(totalWedges / wheelData.length * i);
         // How far apart each wedge of the same option should be.
         let fractionalStep = Math.floor(totalWedges / wedgesWithThisLabel);
         // Assignment slot is the start offset by number of steps according to depth (mod for loop around).
@@ -73,7 +47,7 @@ const calcWedgePattern = () => {
         // Place the assigned slot into the pattern.
         wedgePattern[slotToFill] = i;
 
-        console.log('Depth ' + depth + ' Slot ' + slotToFill + ' ' + labelData[i].name + ' | ' + fractionalStart + ' ' + fractionalStep);
+        console.log('Depth ' + depth + ' Slot ' + slotToFill + ' ' + wheelData[i].label + ' | ' + fractionalStart + ' ' + fractionalStep);
       }
     }
   }
@@ -81,9 +55,9 @@ const calcWedgePattern = () => {
   console.log('wedgePattern ' + wedgePattern);
 };
 
-const buildWedges = () => {
+const buildWedges = (wheelData : WheelOption[]) => {
 
-  calcWedgePattern();
+  calcWedgePattern(wheelData);
 
   // cartesian from polar
   // x = r * cos(angle)
@@ -98,7 +72,7 @@ const buildWedges = () => {
     <>
       {wedgePattern.map((wheelDatum, i) => (
         <Wedge
-          label={labelData[wedgePattern[i]].name}
+          label={wheelData[wedgePattern[i]].label}
           angle={i * (360 / wedgePattern.length)}
           wedgeX={wedgeX}
           wedgeY={wedgeY}
@@ -108,7 +82,7 @@ const buildWedges = () => {
   );
 };
 
-const Wheel = () => {
+const Wheel = ({...props} : WheelProps) => {
 
 
   return (
@@ -120,7 +94,7 @@ const Wheel = () => {
         height: '30rem',
         clipPath: 'circle(50%)',
       }}>
-      {buildWedges()}
+      {buildWedges(props.wheelData)}
       
       </div>
   );

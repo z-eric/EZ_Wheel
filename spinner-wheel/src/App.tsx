@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Wheel from './components/Wheel';
+import MainPanel from './components/MainPanel';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       // alignItems: 'center',
       justifyContent: 'center',
     }}>
-      <Wheel />
+      <MainPanel />
     </div>
   );
 };
