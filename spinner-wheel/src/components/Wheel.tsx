@@ -1,12 +1,14 @@
-import React from 'react';
+import { memo } from 'react';
 import Wedge from './Wedge';
 import { WheelOption } from './MainPanel'
 
 interface WheelProps {
   wheelData: WheelOption[],
+  sendWedgePattern: (pattern: number[]) => void;
 }
 
 let wedgePattern: number[] = [];
+const wheelRadius = 10;
 
 const calcWedgePattern = (wheelData : WheelOption[]) => {
   console.clear();
@@ -55,7 +57,8 @@ const calcWedgePattern = (wheelData : WheelOption[]) => {
   console.log('wedgePattern ' + wedgePattern);
 };
 
-const buildWedges = (wheelData : WheelOption[]) => {
+const buildWedges = (wheelData: WheelOption[]) => {
+  
 
   calcWedgePattern(wheelData);
 
@@ -65,15 +68,17 @@ const buildWedges = (wheelData : WheelOption[]) => {
   let numWedge = wedgePattern.length;
   let degrees = 360 / numWedge /2;
   let radians = degrees * Math.PI / 180;
-  let wedgeX = 4.5 * Math.cos(radians);
-  let wedgeY = 4.5 * Math.sin(radians);
+  let wedgeX = wheelRadius * .95 * Math.cos(radians);
+  let wedgeY = wheelRadius * .95 * Math.sin(radians);
 
   return (
     <>
-      {wedgePattern.map((wheelDatum, i) => (
+      {wedgePattern.map((optionIndex, wedgeIndex) => (
         <Wedge
-          label={wheelData[wedgePattern[i]].label}
-          angle={i * (360 / wedgePattern.length)}
+          key={wedgeIndex}
+          wheelRadius={wheelRadius}
+          label={wheelData[optionIndex].label}
+          angle={wedgeIndex * (360 / wedgePattern.length)}
           wedgeX={wedgeX}
           wedgeY={wedgeY}
         />
@@ -82,22 +87,21 @@ const buildWedges = (wheelData : WheelOption[]) => {
   );
 };
 
-const Wheel = ({...props} : WheelProps) => {
 
-
+const Wheel = memo(({...props} : WheelProps) => {
+  
   return (
-    <div
-      style={{
-        position: 'relative',
-        backgroundColor:'lightgray',
-        width: '30rem',
-        height: '30rem',
-        clipPath: 'circle(50%)',
-      }}>
-      {buildWedges(props.wheelData)}
-      
+    <>
+      <div
+        style={{
+          position: 'relative',
+          width: '30rem',
+          height: '30rem',
+        }}>
+        {buildWedges(props.wheelData)}
       </div>
+    </>
   );
-};
+});
 
 export default Wheel;

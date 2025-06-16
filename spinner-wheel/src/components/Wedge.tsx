@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface WedgeProps {
+  wheelRadius: number,
   label: string,
   angle: number,
   wedgeX: number,
@@ -17,15 +18,15 @@ const Wedge = ({...props}: WedgeProps) => {
           height: '100%',      
           transform: `rotate(${props.angle}deg)`,
           position: 'absolute',
-      }}>
+        }}>
       
-      <svg width='100%' height='100%' viewBox='0 0 10 10'>
-        <path
-          d={`M 5 5
-            l ${props.wedgeX} ${props.wedgeY}
-            a 4.5 4.5 0 0 0 0 ${props.wedgeY * -2}
-            Z`}
-          fill='blue' stroke='black' strokeWidth={'0.05'}
+        <svg width='100%' height='100%' viewBox={`0 0 ${props.wheelRadius * 2} ${props.wheelRadius * 2}`}>
+          <path
+            d={`M ${props.wheelRadius} ${props.wheelRadius}
+              l ${props.wedgeX} ${props.wedgeY}
+              a ${props.wheelRadius} ${props.wheelRadius} 0 0 0 0 ${props.wedgeY * -2}
+              Z`}
+            fill='turquoise' stroke='black' strokeWidth={'0.1'}
           />
         </svg>
       </div>
@@ -41,11 +42,11 @@ const Wedge = ({...props}: WedgeProps) => {
           textAlign: 'right',
           fontSize: '150%',
           alignContent: 'center',
-          paddingRight: '2rem',
+          paddingRight: '5%',
           // textOrientation: 'upright',
           // writingMode: 'vertical-lr',
       }}>
-      {props.label}
+        {props.label}
       </div>
     </>
   );

@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import Wheel from './Wheel';
+import WheelSpinner from './WheelSpinner';
 
 export interface WheelOption{
     label: string, 
     value: number,
 }
+
+const DEBUG_MODE = true;
 
 const defaultOptions: WheelOption[] = [
   {
@@ -16,7 +18,7 @@ const defaultOptions: WheelOption[] = [
 const debugLabels: WheelOption[] = [
   {
     label: '👺',
-    value: 3,
+    value: 1,
   },
   {
     label: '🤗',
@@ -45,16 +47,28 @@ const debugLabels: WheelOption[] = [
 ];
 
 const initializeWheelData = () => {
-  // return defaultOptions;
-  return debugLabels;
+  return DEBUG_MODE ? debugLabels : defaultOptions;
 }
 
 const MainPanel = () => {
 
-  const [WheelData, setWheelData] = useState(initializeWheelData);
+  const [wheelData, setWheelData] = useState(initializeWheelData);
+  const [isActive, setIsActive] = useState(false);
+  const [winningLocation, setWinningLocation] = useState(0);
+
+  const isActiveSetter = (active: boolean) => {
+    setIsActive(active);
+  };
+  const winningLocationSetter = (location: number) => {
+    setWinningLocation(location);
+  };
+
   return (
-    <Wheel
-      wheelData={WheelData}
+    <WheelSpinner
+      wheelData={wheelData}
+      isActive={isActive}
+      isActiveSetter={isActiveSetter}
+      winningLocationSetter={winningLocationSetter}
     />
   )
 }
