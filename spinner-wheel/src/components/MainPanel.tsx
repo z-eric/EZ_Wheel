@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import WheelSpinner from './WheelSpinner';
 import LabelPanel from './LabelPanel';
-
-export interface WheelOption{
-    label: string, 
-    value: number,
-}
+import { WheelDataContext, WheelOption } from '../contexts/WheelDataContext';
 
 const DEBUG_MODE = true;
 
@@ -16,7 +12,7 @@ const defaultOptions: WheelOption[] = [
   }
 ]
 
-const debugLabels: WheelOption[] = [
+const debugOptions: WheelOption[] = [
   {
     label: '👺',
     value: 1,
@@ -48,7 +44,7 @@ const debugLabels: WheelOption[] = [
 ];
 
 const initializeWheelData = () => {
-  return DEBUG_MODE ? debugLabels : defaultOptions;
+  return DEBUG_MODE ? debugOptions : defaultOptions;
 }
 
 const MainPanel = () => {
@@ -66,12 +62,11 @@ const MainPanel = () => {
   };
 
   return (
-    <>
+    <WheelDataContext.Provider value={wheelData}>
       <div style={{
         position: 'absolute',
       }}>
         <WheelSpinner
-          wheelData={wheelData}
           isActive={isActive}
           isActiveSetter={isActiveSetter}
           winningLocationSetter={winningLocationSetter}
@@ -88,10 +83,8 @@ const MainPanel = () => {
       }}/>
       <p style={{position: 'absolute', top: '2em', left: '0'}}>Winner {wheelData[winningLocation].label}</p>
       <p style={{ position: 'absolute', top: '3em', left: '0' }}>Active {isActive ? 'true' : 'false'}</p>
-      <LabelPanel
-        wheelData={wheelData}
-      />
-    </>
+      <LabelPanel/>
+    </WheelDataContext.Provider>
   )
 }
 

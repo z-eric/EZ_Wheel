@@ -1,12 +1,13 @@
-import { WheelOption } from "./MainPanel";
+import { useContext } from "react";
+import { WheelDataContext } from "../contexts/WheelDataContext";
 
-interface LabelPanelProps {
-  wheelData: WheelOption[];
-}
+const LabelPanel = () => {
+  const wheelData = useContext(WheelDataContext);
 
-const LabelPanel = ({wheelData}: LabelPanelProps) => {
   return (
-    <div></div>
+    <div>
+      {wheelData[0].label}
+    </div>
   )
 }
 

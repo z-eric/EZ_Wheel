@@ -1,9 +1,8 @@
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import Wedge from './Wedge';
-import { WheelOption } from './MainPanel'
+import { WheelDataContext, WheelOption } from '../contexts/WheelDataContext';
 
 interface WheelProps {
-  wheelData: WheelOption[],
   sendWedgePattern: (pattern: number[]) => void;
 }
 
@@ -90,11 +89,12 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number) => {
 };
 
 
-const Wheel = memo(({wheelData, sendWedgePattern} : WheelProps) => {
+const Wheel = memo(({sendWedgePattern} : WheelProps) => {
+  const wheelData = useContext(WheelDataContext);
   
 
-calcWedgePattern(wheelData);
-sendWedgePattern(wedgePattern);
+  calcWedgePattern(wheelData);
+  sendWedgePattern(wedgePattern);
 
   return (
     <>

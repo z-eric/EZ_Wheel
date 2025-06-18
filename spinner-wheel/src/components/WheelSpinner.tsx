@@ -1,9 +1,7 @@
 import { useCallback, useState } from "react";
 import Wheel from "./Wheel";
-import { WheelOption } from "./MainPanel";
 
 interface WheelSpinnerProps {
-  wheelData: WheelOption[],
   isActive: boolean,
   isActiveSetter: (active: boolean) => void,
   winningLocationSetter: (location: number) => void,
@@ -21,7 +19,7 @@ const findWinningOption = (winningDegree: number) => {
   return wedgePattern[wedge === wedgePattern.length ? 0 : wedge];
 }
 
-const WheelSpinner = ({wheelData, isActive, isActiveSetter, winningLocationSetter}: WheelSpinnerProps) => {
+const WheelSpinner = ({isActive, isActiveSetter, winningLocationSetter}: WheelSpinnerProps) => {
   
   const [rotation, setRotation] = useState(0);
 
@@ -63,7 +61,6 @@ const WheelSpinner = ({wheelData, isActive, isActiveSetter, winningLocationSette
         transform: `rotate(${rotation}deg)`,
       }}>
         <Wheel
-          wheelData={wheelData}
           sendWedgePattern={setWedgePattern}
         />
       
