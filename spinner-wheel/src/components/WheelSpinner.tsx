@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Wheel from "./Wheel";
 import { WheelOption } from "./MainPanel";
 
@@ -9,35 +9,50 @@ interface WheelSpinnerProps {
   winningLocationSetter: (location: number) => void,
 }
 
+let wedgePattern: number[];
+
+const findWinningOption = (winningDegree: number) => {
+  console.log('\nwin deg ' + winningDegree)
+  let normalized = (360 - winningDegree) / 360;
+  console.log('normalized ' + normalized);
+  let wedge = normalized * wedgePattern.length;
+  console.log('wedge ' + wedge)
+  wedge = Math.round(wedge)
+  return wedgePattern[wedge === wedgePattern.length ? 0 : wedge];
+}
+
 const WheelSpinner = ({ ...props }: WheelSpinnerProps) => {
   
   const [rotation, setRotation] = useState(0);
 
-  let wedgePattern: number[];
-  const setWedgePattern = (pattern: number[]) => {
+  const setWedgePattern = useCallback((pattern: number[]) => {
     wedgePattern = pattern;
-  };
-
-  
+  }, []);
 
   const spin = () => {
-    const distance = 1800;
-    const duration = 3000;
+    props.isActiveSetter(true);
+    const distance = 777;
+    const duration = 1500;
+
+    setTimeout(props.winningLocationSetter,1500,(findWinningOption((rotation + distance) % 360)));
 
     let timeStarted: number;
     const turn = (callTime: number) => {
       if (!timeStarted)
         timeStarted = callTime;
       const timePassed = callTime - timeStarted;
-      const increment = distance * (timePassed / duration);
+      const timeNormal = timePassed / duration;
+      const increment = distance * (1 - (1 - timeNormal) ** 3); // Cubic bezier with maximal control points reduces to standard cubic
       const newRotation = (rotation + increment) % 360;
 
       setRotation(newRotation);
 
       if (timePassed < duration)
         requestAnimationFrame(turn);
+        
     }
     requestAnimationFrame(turn);
+    setTimeout(props.isActiveSetter,1500,false);
   }
 
   
@@ -51,10 +66,10 @@ const WheelSpinner = ({ ...props }: WheelSpinnerProps) => {
           wheelData={props.wheelData}
           sendWedgePattern={setWedgePattern}
         />
-          
+      
       </div>  
       <br/>
-      <button onClick={spin } style={{position: 'absolute'}}>O</button>
+      <button onClick={spin} disabled={props.isActive} style={{position: 'absolute', top: 0}}>spin</button>
       <div style={{position: 'absolute', left: 0}}>{rotation}</div>
     </>
   )

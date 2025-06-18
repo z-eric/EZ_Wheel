@@ -6,6 +6,7 @@ interface WedgeProps {
   angle: number,
   wedgeX: number,
   wedgeY: number,
+  viewBox: number,
 }
 
 const Wedge = ({...props}: WedgeProps) => {
@@ -20,9 +21,9 @@ const Wedge = ({...props}: WedgeProps) => {
           position: 'absolute',
         }}>
       
-        <svg width='100%' height='100%' viewBox={`0 0 ${props.wheelRadius * 2} ${props.wheelRadius * 2}`}>
+        <svg width='100%' height='100%' viewBox={`0 0 ${props.viewBox} ${props.viewBox}`}>
           <path
-            d={`M ${props.wheelRadius} ${props.wheelRadius}
+            d={`M ${props.viewBox / 2} ${props.viewBox / 2}
               l ${props.wedgeX} ${props.wedgeY}
               a ${props.wheelRadius} ${props.wheelRadius} 0 0 0 0 ${props.wedgeY * -2}
               Z`}

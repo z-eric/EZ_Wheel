@@ -7,8 +7,9 @@ interface WheelProps {
   sendWedgePattern: (pattern: number[]) => void;
 }
 
-let wedgePattern: number[] = [];
 const wheelRadius = 10;
+
+let wedgePattern: number[] = [];
 
 const calcWedgePattern = (wheelData : WheelOption[]) => {
   console.clear();
@@ -57,19 +58,19 @@ const calcWedgePattern = (wheelData : WheelOption[]) => {
   console.log('wedgePattern ' + wedgePattern);
 };
 
-const buildWedges = (wheelData: WheelOption[]) => {
+const buildWedges = (wheelData: WheelOption[], wheelRadius: number) => {
   
-
-  calcWedgePattern(wheelData);
 
   // cartesian from polar
   // x = r * cos(angle)
   // y = r * sin(angle)
+  let viewBox = wheelRadius * 2;
+  wheelRadius *= 0.97;
   let numWedge = wedgePattern.length;
   let degrees = 360 / numWedge /2;
   let radians = degrees * Math.PI / 180;
-  let wedgeX = wheelRadius * .95 * Math.cos(radians);
-  let wedgeY = wheelRadius * .95 * Math.sin(radians);
+  let wedgeX = wheelRadius * Math.cos(radians);
+  let wedgeY = wheelRadius * Math.sin(radians);
 
   return (
     <>
@@ -81,6 +82,7 @@ const buildWedges = (wheelData: WheelOption[]) => {
           angle={wedgeIndex * (360 / wedgePattern.length)}
           wedgeX={wedgeX}
           wedgeY={wedgeY}
+          viewBox={viewBox}
         />
       ))}
     </>
@@ -90,6 +92,10 @@ const buildWedges = (wheelData: WheelOption[]) => {
 
 const Wheel = memo(({...props} : WheelProps) => {
   
+
+calcWedgePattern(props.wheelData);
+props.sendWedgePattern(wedgePattern);
+
   return (
     <>
       <div
@@ -98,7 +104,7 @@ const Wheel = memo(({...props} : WheelProps) => {
           width: '30rem',
           height: '30rem',
         }}>
-        {buildWedges(props.wheelData)}
+        {buildWedges(props.wheelData, wheelRadius)}
       </div>
     </>
   );
