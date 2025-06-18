@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import WheelSpinner from './WheelSpinner';
-import { relative } from 'path';
+import LabelPanel from './LabelPanel';
 
 export interface WheelOption{
     label: string, 
@@ -61,7 +61,7 @@ const MainPanel = () => {
     setIsActive(active);
   };
   const winningLocationSetter = (location: number) => {
-    console.log('location ' + location)
+    // console.log('location ' + location)
     setWinningLocation(location);
   };
 
@@ -85,9 +85,12 @@ const MainPanel = () => {
         left: '50%',
         backgroundColor: 'red',
         zIndex: '10',
-      }}></div>
+      }}/>
       <p style={{position: 'absolute', top: '2em', left: '0'}}>Winner {wheelData[winningLocation].label}</p>
-      <p style={{position: 'absolute', top: '3em', left: '0'}}>Active {isActive ? 'true' : 'false'}</p>
+      <p style={{ position: 'absolute', top: '3em', left: '0' }}>Active {isActive ? 'true' : 'false'}</p>
+      <LabelPanel
+        wheelData={wheelData}
+      />
     </>
   )
 }

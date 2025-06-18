@@ -9,7 +9,7 @@ interface WedgeProps {
   viewBox: number,
 }
 
-const Wedge = ({...props}: WedgeProps) => {
+const Wedge = ({wheelRadius, label, angle, wedgeX, wedgeY, viewBox}: WedgeProps) => {
 
   return (
     <>
@@ -17,15 +17,15 @@ const Wedge = ({...props}: WedgeProps) => {
         style={{
           width: '100%',
           height: '100%',      
-          transform: `rotate(${props.angle}deg)`,
+          transform: `rotate(${angle}deg)`,
           position: 'absolute',
         }}>
       
-        <svg width='100%' height='100%' viewBox={`0 0 ${props.viewBox} ${props.viewBox}`}>
+        <svg width='100%' height='100%' viewBox={`0 0 ${viewBox} ${viewBox}`}>
           <path
-            d={`M ${props.viewBox / 2} ${props.viewBox / 2}
-              l ${props.wedgeX} ${props.wedgeY}
-              a ${props.wheelRadius} ${props.wheelRadius} 0 0 0 0 ${props.wedgeY * -2}
+            d={`M ${viewBox / 2} ${viewBox / 2}
+              l ${wedgeX} ${wedgeY}
+              a ${wheelRadius} ${wheelRadius} 0 0 0 0 ${wedgeY * -2}
               Z`}
             fill='turquoise' stroke='black' strokeWidth={'0.1'}
           />
@@ -35,7 +35,7 @@ const Wedge = ({...props}: WedgeProps) => {
         style={{
           width: '50%',
           height: '100%',
-          transform: `rotate(${props.angle}deg)`,
+          transform: `rotate(${angle}deg)`,
           transformOrigin: 'left',
           boxSizing: 'border-box',
           position: 'absolute',
@@ -47,7 +47,7 @@ const Wedge = ({...props}: WedgeProps) => {
           // textOrientation: 'upright',
           // writingMode: 'vertical-lr',
       }}>
-        {props.label}
+        {label}
       </div>
     </>
   );

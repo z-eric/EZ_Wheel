@@ -12,16 +12,16 @@ interface WheelSpinnerProps {
 let wedgePattern: number[];
 
 const findWinningOption = (winningDegree: number) => {
-  console.log('\nwin deg ' + winningDegree)
+  // console.log('\nwin deg ' + winningDegree)
   let normalized = (360 - winningDegree) / 360;
-  console.log('normalized ' + normalized);
+  // console.log('normalized ' + normalized);
   let wedge = normalized * wedgePattern.length;
-  console.log('wedge ' + wedge)
+  // console.log('wedge ' + wedge)
   wedge = Math.round(wedge)
   return wedgePattern[wedge === wedgePattern.length ? 0 : wedge];
 }
 
-const WheelSpinner = ({ ...props }: WheelSpinnerProps) => {
+const WheelSpinner = ({wheelData, isActive, isActiveSetter, winningLocationSetter}: WheelSpinnerProps) => {
   
   const [rotation, setRotation] = useState(0);
 
@@ -30,11 +30,11 @@ const WheelSpinner = ({ ...props }: WheelSpinnerProps) => {
   }, []);
 
   const spin = () => {
-    props.isActiveSetter(true);
+    isActiveSetter(true);
     const distance = 777;
     const duration = 1500;
 
-    setTimeout(props.winningLocationSetter,1500,(findWinningOption((rotation + distance) % 360)));
+    setTimeout(winningLocationSetter,1500,(findWinningOption((rotation + distance) % 360)));
 
     let timeStarted: number;
     const turn = (callTime: number) => {
@@ -52,7 +52,7 @@ const WheelSpinner = ({ ...props }: WheelSpinnerProps) => {
         
     }
     requestAnimationFrame(turn);
-    setTimeout(props.isActiveSetter,1500,false);
+    setTimeout(isActiveSetter,1500,false);
   }
 
   
@@ -63,13 +63,13 @@ const WheelSpinner = ({ ...props }: WheelSpinnerProps) => {
         transform: `rotate(${rotation}deg)`,
       }}>
         <Wheel
-          wheelData={props.wheelData}
+          wheelData={wheelData}
           sendWedgePattern={setWedgePattern}
         />
       
       </div>  
       <br/>
-      <button onClick={spin} disabled={props.isActive} style={{position: 'absolute', top: 0}}>spin</button>
+      <button onClick={spin} disabled={isActive} style={{position: 'absolute', top: 0}}>spin</button>
       <div style={{position: 'absolute', left: 0}}>{rotation}</div>
     </>
   )

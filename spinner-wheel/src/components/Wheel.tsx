@@ -90,11 +90,11 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number) => {
 };
 
 
-const Wheel = memo(({...props} : WheelProps) => {
+const Wheel = memo(({wheelData, sendWedgePattern} : WheelProps) => {
   
 
-calcWedgePattern(props.wheelData);
-props.sendWedgePattern(wedgePattern);
+calcWedgePattern(wheelData);
+sendWedgePattern(wedgePattern);
 
   return (
     <>
@@ -104,7 +104,7 @@ props.sendWedgePattern(wedgePattern);
           width: '30rem',
           height: '30rem',
         }}>
-        {buildWedges(props.wheelData, wheelRadius)}
+        {buildWedges(wheelData, wheelRadius)}
       </div>
     </>
   );
