@@ -3,15 +3,16 @@ import { WheelOption } from "../contexts/WheelContext";
 interface LabelItemProps {
   wheelOption: WheelOption;
   index: number;
-  handleChange: (text: string, index: number) => void;
+  handleLabel: (text: string, index: number) => void;
+  handleWeight: (weight: string, index: number) => void;
 }
 
-const LabelItem = ({ wheelOption, index, handleChange }: LabelItemProps) => {
+const LabelItem = ({ wheelOption, index, handleLabel, handleWeight }: LabelItemProps) => {
 
   return (
     <div>
-      <input value={wheelOption.value} style={{width: '2em'}}></input>
-      <input value={wheelOption.label} onChange={(e) => handleChange(e.target.value, index)}></input>
+      <input value={wheelOption.value} onChange={(e) => handleWeight(e.target.value, index)} style={{width: '2em'}}></input>
+      <input value={wheelOption.label} onChange={(e) => handleLabel(e.target.value, index)}></input>
     </div>
   )
 }
