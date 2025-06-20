@@ -22,7 +22,7 @@ let wedgePattern: number[] = [];
  * of repeated wedges.
  */
 const calcWedgePattern = (wheelData : WheelOption[]) => {
-  console.clear();
+  // console.clear();
   
   let totalWedges = 0; // The weights of all options added together.
   let maxDepth = 0; // The highest weight.
@@ -32,7 +32,7 @@ const calcWedgePattern = (wheelData : WheelOption[]) => {
       maxDepth = wheelData[i].value;
   }
 
-  console.log('totalWedges ' + totalWedges + ' maxDepth ' + maxDepth);
+  // console.log('totalWedges ' + totalWedges + ' maxDepth ' + maxDepth);
   wedgePattern = new Array(totalWedges);
 
   /* Iterate by "depth" first, assigning a wedge to every option before
@@ -60,12 +60,12 @@ const calcWedgePattern = (wheelData : WheelOption[]) => {
         // Place the assigned slot into the pattern.
         wedgePattern[slotToFill] = i;
 
-        console.log('Depth ' + depth + ' Slot ' + slotToFill + ' ' + wheelData[i].label + ' | ' + fractionalStart + ' ' + fractionalStep);
+        // console.log('Depth ' + depth + ' Slot ' + slotToFill + ' ' + wheelData[i].label + ' | ' + fractionalStart + ' ' + fractionalStep);
       }
     }
   }
-  console.log('wedgePattern.length ' + wedgePattern.length);
-  console.log('wedgePattern ' + wedgePattern);
+  // console.log('wedgePattern.length ' + wedgePattern.length);
+  // console.log('wedgePattern ' + wedgePattern);
 };
 
 /** Calculates the mathematical properties each wedge requires
