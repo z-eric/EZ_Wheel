@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import WheelSpinner from './WheelSpinner';
 import LabelPanel from './LabelPanel';
-import { WheelDataContext, WheelOption } from '../contexts/WheelDataContext';
+import { WheelContextProvider, WheelOption } from '../contexts/WheelContext';
 
 const DEBUG_MODE = true;
 
@@ -49,22 +49,23 @@ const initializeWheelData = () => {
 
 const MainPanel = () => {
 
-  const [wheelData, setWheelData] = useState(initializeWheelData);
+  // const [wheelData, setWheelData] = useState(initializeWheelData);
   const [isActive, setIsActive] = useState(false);
   const [winningLocation, setWinningLocation] = useState(0);
 
   const isActiveSetter = (active: boolean) => {
     setIsActive(active);
   };
+
   const winningLocationSetter = (location: number) => {
     // console.log('location ' + location)
     setWinningLocation(location);
   };
 
   return (
-    <WheelDataContext.Provider value={wheelData}>
+    <WheelContextProvider initOptions={initializeWheelData()}>
       <div style={{
-        position: 'absolute',
+        // position: 'absolute',
       }}>
         <WheelSpinner
           isActive={isActive}
@@ -81,10 +82,9 @@ const MainPanel = () => {
         backgroundColor: 'red',
         zIndex: '10',
       }}/>
-      <p style={{position: 'absolute', top: '2em', left: '0'}}>Winner {wheelData[winningLocation].label}</p>
-      <p style={{ position: 'absolute', top: '3em', left: '0' }}>Active {isActive ? 'true' : 'false'}</p>
-      <LabelPanel/>
-    </WheelDataContext.Provider>
+      {/* <p style={{position: 'absolute', top: '2em', left: '0'}}>Winner {wheelData[winningLocation].label}</p> */}
+      <LabelPanel />
+    </WheelContextProvider>
   )
 }
 

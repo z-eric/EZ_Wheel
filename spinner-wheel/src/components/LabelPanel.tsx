@@ -1,12 +1,23 @@
 import { useContext } from "react";
-import { WheelDataContext } from "../contexts/WheelDataContext";
+import { WheelContext } from "../contexts/WheelContext";
+import LabelItem from "./LabelItem";
 
 const LabelPanel = () => {
-  const wheelData = useContext(WheelDataContext);
+  const wheelContext = useContext(WheelContext);
+
+  const handleChange = (text: string, index: number) => {
+    console.log(text + ' ' + index);
+    let newData = wheelContext.data.slice();
+    newData[index].label = text;
+
+    wheelContext.setData(newData);
+  }
 
   return (
     <div>
-      {wheelData[0].label}
+      {wheelContext.data.map((wheelOption, i) => (
+        <LabelItem wheelOption={wheelOption} index={i} handleChange={handleChange}/>
+      ))}
     </div>
   )
 }

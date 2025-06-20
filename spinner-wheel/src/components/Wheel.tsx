@@ -1,6 +1,13 @@
+/** Wheel.tsx
+ * Calculates, builds, and renders the wheel wedges based
+ * on the weights given to the options.
+ * Passes the resulting wedge pattern back up to WheelSpinner
+ * for correlating winning wedge with actual label.
+ */ 
+
 import { memo, useContext } from 'react';
 import Wedge from './Wedge';
-import { WheelDataContext, WheelOption } from '../contexts/WheelDataContext';
+import { WheelContext, WheelOption } from '../contexts/WheelContext';
 
 interface WheelProps {
   sendWedgePattern: (pattern: number[]) => void;
@@ -10,6 +17,10 @@ const wheelRadius = 10;
 
 let wedgePattern: number[] = [];
 
+/** Calculates the number and positions of wedges based on
+ * the provided weights. Algorithm attempts to minimize clumping
+ * of repeated wedges.
+ */
 const calcWedgePattern = (wheelData : WheelOption[]) => {
   console.clear();
   
@@ -57,9 +68,10 @@ const calcWedgePattern = (wheelData : WheelOption[]) => {
   console.log('wedgePattern ' + wedgePattern);
 };
 
+/** Calculates the mathematical properties each wedge requires
+ * and returns the array of assembled Wedges.
+ */
 const buildWedges = (wheelData: WheelOption[], wheelRadius: number) => {
-  
-
   // cartesian from polar
   // x = r * cos(angle)
   // y = r * sin(angle)
@@ -88,12 +100,10 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number) => {
   );
 };
 
-
 const Wheel = memo(({sendWedgePattern} : WheelProps) => {
-  const wheelData = useContext(WheelDataContext);
-  
+  const wheelContext = useContext(WheelContext);
 
-  calcWedgePattern(wheelData);
+  calcWedgePattern(wheelContext.data);
   sendWedgePattern(wedgePattern);
 
   return (
@@ -104,7 +114,7 @@ const Wheel = memo(({sendWedgePattern} : WheelProps) => {
           width: '30rem',
           height: '30rem',
         }}>
-        {buildWedges(wheelData, wheelRadius)}
+        {buildWedges(wheelContext.data, wheelRadius)}
       </div>
     </>
   );

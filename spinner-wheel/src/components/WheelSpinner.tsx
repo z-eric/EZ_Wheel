@@ -1,3 +1,7 @@
+/** WheelSpinner.tsx
+ * Handles animating the Wheel component and determining the winner.
+ */
+
 import { useCallback, useState } from "react";
 import Wheel from "./Wheel";
 
@@ -31,7 +35,7 @@ const WheelSpinner = ({isActive, isActiveSetter, winningLocationSetter}: WheelSp
     isActiveSetter(true);
     const distance = 777;
     const duration = 1500;
-
+    //TODO spin randomized
     setTimeout(winningLocationSetter,1500,(findWinningOption((rotation + distance) % 360)));
 
     let timeStarted: number;
@@ -53,7 +57,6 @@ const WheelSpinner = ({isActive, isActiveSetter, winningLocationSetter}: WheelSp
     setTimeout(isActiveSetter,1500,false);
   }
 
-  
   return (
     <>
       <div style={{
@@ -67,7 +70,7 @@ const WheelSpinner = ({isActive, isActiveSetter, winningLocationSetter}: WheelSp
       </div>  
       <br/>
       <button onClick={spin} disabled={isActive} style={{position: 'absolute', top: 0}}>spin</button>
-      <div style={{position: 'absolute', left: 0}}>{rotation}</div>
+      <div style={{position: 'absolute', left: 0,}}>{rotation}</div>
     </>
   )
 }
