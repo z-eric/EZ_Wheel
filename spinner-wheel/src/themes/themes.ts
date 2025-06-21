@@ -23,3 +23,7 @@ export const defaultTheme: Theme = {
     secondary: 'teal',
   }
 }
+
+export const themeList = [
+  defaultTheme,
+]
