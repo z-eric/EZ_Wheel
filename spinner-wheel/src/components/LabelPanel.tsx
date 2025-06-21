@@ -5,23 +5,18 @@ import LabelItem from "./LabelItem";
 const LabelPanel = () => {
   const wheelContext = useContext(WheelContext);
 
-  const handleChange = (
-    text: string | null,
-    weight: number,
-    index: number,
-  ) => {
-    console.log(text + ' ' + weight + ' ' + index);
+  const handleLabel = (text: string, index: number) => {
     let newData = wheelContext.data.slice();
-    if (text != null) newData[index].label = text;
-    if (weight >= 0) newData[index].value = weight;
+    newData[index].label = text;
     wheelContext.setData(newData);
   }
-
-  const handleLabel = (text: string, index: number) => {
-    handleChange(text, -1, index);
+  const handleWeight = (weight: number, index: number) => {
+      let newData = wheelContext.data.slice();
+      newData[index].value = weight;
+      wheelContext.setData(newData);
   }
-  const handleWeight = (weight: string, index: number) => {
-    handleChange(null, weight === '' ? 0 : Number.parseInt(weight), index);
+  const handleColor = (index: number) => {
+    console.log(index);
   }
 
   return (
@@ -33,6 +28,7 @@ const LabelPanel = () => {
           index={i}
           handleLabel={handleLabel}
           handleWeight={handleWeight}
+          handleColor={handleColor}
         />
       ))}
     </div>
