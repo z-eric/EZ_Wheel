@@ -64,8 +64,23 @@ const calcWedgePattern = (wheelData : WheelOption[]) => {
       }
     }
   }
-  // console.log('wedgePattern.length ' + wedgePattern.length);
-  // console.log('wedgePattern ' + wedgePattern);
+
+  /* Go around the wheel twice checking for adjacent duplicates and swapping
+    them if the previous is not also the same thing. n iterations seems to
+    solve adjacency of up to n+1 except in cases of extreme imbalance. 
+    As an option weight approaches half the weight total adjacency becomes unavoidable. */
+  for (let current = 0, limit = 0; limit < wedgePattern.length * 2; current++, limit++){
+    current = current % wedgePattern.length; // stay within array bounds
+    let prev = current === 0 ? wedgePattern.length - 1 : current - 1; // set prev accounting for wrap around
+    let next = current === wedgePattern.length - 1 ? 0 : current + 1; // set next accounting for wrap around
+    if (wedgePattern[prev] !== wedgePattern[current]
+      && wedgePattern[current] === wedgePattern[next]
+    ) {
+      let hold = wedgePattern[current];
+      wedgePattern[current] = wedgePattern[prev];
+      wedgePattern[prev] = hold;
+    }
+  }
 };
 
 /** Calculates the mathematical properties each wedge requires
