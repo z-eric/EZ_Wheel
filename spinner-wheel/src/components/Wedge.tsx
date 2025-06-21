@@ -7,9 +7,10 @@ interface WedgeProps {
   wedgeX: number,
   wedgeY: number,
   viewBox: number,
+  color: string,
 }
 
-const Wedge = ({wheelRadius, label, angle, wedgeX, wedgeY, viewBox}: WedgeProps) => {
+const Wedge = ({wheelRadius, label, angle, wedgeX, wedgeY, viewBox, color}: WedgeProps) => {
 
   return (
     <>
@@ -27,7 +28,7 @@ const Wedge = ({wheelRadius, label, angle, wedgeX, wedgeY, viewBox}: WedgeProps)
               l ${wedgeX} ${wedgeY}
               a ${wheelRadius} ${wheelRadius} 0 0 0 0 ${wedgeY * -2}
               Z`}
-            fill='turquoise' stroke='black' strokeWidth={'0.1'}
+            fill={color} stroke='black' strokeWidth={'0.1'}
           />
         </svg>
       </div>

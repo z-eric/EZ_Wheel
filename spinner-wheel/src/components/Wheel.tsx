@@ -8,6 +8,7 @@
 import { memo, useContext } from 'react';
 import Wedge from './Wedge';
 import { WheelContext, WheelOption } from '../contexts/WheelContext';
+import { Theme } from '../themes/themes';
 
 interface WheelProps {
   sendWedgePattern: (pattern: number[]) => void;
@@ -86,7 +87,7 @@ const calcWedgePattern = (wheelData : WheelOption[]) => {
 /** Calculates the mathematical properties each wedge requires
  * and returns the array of assembled Wedges.
  */
-const buildWedges = (wheelData: WheelOption[], wheelRadius: number) => {
+const buildWedges = (wheelData: WheelOption[], wheelRadius: number, theme: Theme) => {
   // cartesian from polar
   // x = r * cos(angle)
   // y = r * sin(angle)
@@ -109,6 +110,9 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number) => {
           wedgeX={wedgeX}
           wedgeY={wedgeY}
           viewBox={viewBox}
+          // color={wheelData[optionIndex].color ?? `hsl(${(360 / wheelData.length) * optionIndex} 50% 50%)`} // programmatic hue
+          color={wheelData[optionIndex].color ?? `hsl(250 50% ${100 - ((50 / wheelData.length) * optionIndex)}%)`} // programmatic lightness
+          // color={wheelData[optionIndex].color ?? theme.wedgeColors[optionIndex % theme.wedgeColors.length]} // theme
         />
       ))}
     </>
@@ -129,7 +133,7 @@ const Wheel = memo(({sendWedgePattern} : WheelProps) => {
           width: '30rem',
           height: '30rem',
         }}>
-        {buildWedges(wheelContext.data, wheelRadius)}
+        {buildWedges(wheelContext.data, wheelRadius, wheelContext.themes[0])}
       </div>
     </>
   );

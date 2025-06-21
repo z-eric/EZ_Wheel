@@ -3,24 +3,24 @@ import WheelSpinner from './WheelSpinner';
 import LabelPanel from './LabelPanel';
 import { WheelContextProvider, WheelOption } from '../contexts/WheelContext';
 
-const DEBUG_MODE = false;
+const DEBUG_MODE = true;
 
 const defaultOptions: WheelOption[] = [
   {
     label: 'Welcome',
-    value: 2,
-  },
-  {
-    label: 'to',
-    value: 2,
-  },
-  {
-    label: 'EZ',
-    value: 2,
+    value: 3,
   },
   {
     label: 'Spinner',
-    value: 2,
+    value: 3,
+  },
+  {
+    label: 'EZ',
+    value: 3,
+  },
+  {
+    label: 'to',
+    value: 3,
   },
 ]
 
@@ -28,6 +28,7 @@ const debugOptions: WheelOption[] = [
   {
     label: '👺',
     value: 1,
+    // color: '#9a458a',
   },
   {
     label: '🤗',
@@ -35,7 +36,7 @@ const debugOptions: WheelOption[] = [
   },
   {
     label: '3️⃣',
-    value: 7,
+    value: 3,
   },
   {
     label: '💀',
@@ -47,12 +48,36 @@ const debugOptions: WheelOption[] = [
   },
   {
     label: '------',
-    value: 7,
+    value: 4,
   },
   {
     label: 'Hello',
     value: 3,
   },
+  {
+    label: '🎄✨✨🎄',
+    value: 1,
+  },
+  {
+    label: '🐈',
+    value: 2,
+  },
+  // {
+  //   label: '$1000',
+  //   value: 2,
+  // },
+  // {
+  //   label: 'Booya',
+  //   value: 1,
+  // },
+  // {
+  //   label: '🎃',
+  //   value: 3,
+  // },
+  // {
+  //   label: 'Very Nice',
+  //   value: 3,
+  // },
 ];
 
 const initializeWheelData = () => {
