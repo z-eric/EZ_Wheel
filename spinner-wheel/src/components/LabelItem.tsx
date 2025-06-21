@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { WheelOption } from "../contexts/WheelContext";
 
 interface LabelItemProps {
@@ -29,7 +29,7 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor 
   }
   const clearInvalidWeight = (value: string) => {
     if (wheelOption.value.toString() !== value) {
-      setWeightInput('0');
+      setWeightInput('f');
     }
   }
 
@@ -47,6 +47,7 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor 
           border: '1px solid black',
         }} />
       <div onClick={(e) => handleColor(index)}
+        title={`${wheelOption.color ? 'Custom Color' : 'Theme Auto Color'}`}
         style={{
           // backgroundColor: `${wheelOption.color}`,
           background: `${wheelOption.color ?? 'linear-gradient(135deg, #FFF5 30%, #0005 70%)'}`,

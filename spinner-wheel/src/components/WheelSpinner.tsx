@@ -33,9 +33,8 @@ const WheelSpinner = ({isActive, isActiveSetter, winningLocationSetter}: WheelSp
 
   const spin = () => {
     isActiveSetter(true);
-    const distance = 777;
-    const duration = 1500;
-    //TODO spin randomized
+    const distance = 777 * (0.4 * Math.random() + 0.8);
+    const duration = 1500 * (0.2 * Math.random() + 0.9);
     setTimeout(winningLocationSetter,1500,(findWinningOption((rotation + distance) % 360)));
 
     let timeStarted: number;

@@ -17,13 +17,13 @@ export const WheelContext = createContext<WheelContextType>({
 });
 
 export const WheelContextProvider = ({
-  initOptions,
+  // initOptions,
   children,
 }: {
-  initOptions: WheelOption[],
+  // initOptions: WheelOption[],
   children: ReactNode,
 }) => {
-  const [wheelData, setWheelData] = useState<WheelOption[]>(initOptions);
+  const [wheelData, setWheelData] = useState<WheelOption[]>([{label: '', value: 0,}]);
 
   // useMemo on the context prevents the wheel from re-rendering when animated.
   const wheelContextMemo = useMemo(() => ({

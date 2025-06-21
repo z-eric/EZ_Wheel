@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import WheelSpinner from './WheelSpinner';
 import LabelPanel from './LabelPanel';
-import { WheelContextProvider, WheelOption } from '../contexts/WheelContext';
-import { ThemeContextProvider } from '../contexts/ThemeContext';
+import { WheelContext, WheelContextProvider, WheelOption } from '../contexts/WheelContext';
+import { ThemeContext, ThemeContextProvider } from '../contexts/ThemeContext';
 
 const DEBUG_MODE = true;
 
@@ -29,7 +29,7 @@ const debugOptions: WheelOption[] = [
   {
     label: '👺',
     value: 1,
-    color: '#9a458a',
+    // color: '#9a458a',
   },
   {
     label: '🤗',
@@ -86,10 +86,13 @@ const initializeWheelData = () => {
 }
 
 const MainPanel = () => {
-
+  const themeContext = useContext(ThemeContext);
+  const wheelContext = useContext(WheelContext);
   // const [wheelData, setWheelData] = useState(initializeWheelData);
   const [isActive, setIsActive] = useState(false);
   const [winningLocation, setWinningLocation] = useState(0);
+
+  wheelContext.setData(initializeWheelData());
 
   const isActiveSetter = (active: boolean) => {
     setIsActive(active);
@@ -101,31 +104,31 @@ const MainPanel = () => {
   };
 
   return (
-    <ThemeContextProvider>
-      <WheelContextProvider initOptions={initializeWheelData()}>
-        <div style={{
-          // position: 'absolute',
-        }}>
-          <WheelSpinner
-            isActive={isActive}
-            isActiveSetter={isActiveSetter}
-            winningLocationSetter={winningLocationSetter}
-          />
-        </div>
-        <div style={{
-          position: 'absolute',
-          height: '1px',
-          width: '15rem',
-          top: '15rem',
-          left: '50%',
-          backgroundColor: 'red',
-          zIndex: '10',
-        }}/>
-        {/* <p style={{position: 'absolute', top: '2em', left: '0'}}>Winner {wheelData[winningLocation].label}</p> */}
-        <LabelPanel />
-        </WheelContextProvider>
-      </ThemeContextProvider>
-  )
+    <>
+      <div style={{
+            // position: 'absolute',
+          }}>
+        <WheelSpinner
+          isActive={isActive}
+          isActiveSetter={isActiveSetter}
+          winningLocationSetter={winningLocationSetter}
+        />
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          height: "1px",
+          width: "15rem",
+          top: "15rem",
+          left: "50%",
+          backgroundColor: "red",
+          zIndex: "10",
+        }}
+      />
+      {/* <p style={{position: 'absolute', top: '2em', left: '0'}}>Winner {wheelData[winningLocation].label}</p> */}
+      <LabelPanel />
+    </>
+  );
 }
 
 export default MainPanel;

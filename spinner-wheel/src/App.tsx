@@ -1,6 +1,7 @@
-import React from 'react';
 import './App.css';
 import MainPanel from './components/MainPanel';
+import { ThemeContextProvider } from './contexts/ThemeContext';
+import { WheelContextProvider } from './contexts/WheelContext';
 
 function App() {
   return (
@@ -9,7 +10,11 @@ function App() {
       // alignItems: 'center',
       justifyContent: 'center',
     }}>
-      <MainPanel />
+        <ThemeContextProvider>
+          <WheelContextProvider>
+            <MainPanel />
+          </WheelContextProvider>
+        </ThemeContextProvider>
     </div>
   );
 };
