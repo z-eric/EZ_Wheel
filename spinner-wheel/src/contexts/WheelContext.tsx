@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useMemo, useState } from "react";
+import { createContext, ReactNode, useEffect, useMemo, useState } from "react";
 
 export type WheelContextType = {
   data: WheelOption[],
@@ -16,6 +16,25 @@ export const WheelContext = createContext<WheelContextType>({
   setData: () => { },
 });
 
+const defaultOptions: WheelOption[] = [
+  {
+    label: 'Welcome',
+    value: 3,
+  },
+  {
+    label: 'Spinner',
+    value: 3,
+  },
+  {
+    label: 'EZ',
+    value: 3,
+  },
+  {
+    label: 'to',
+    value: 3,
+  },
+]
+
 export const WheelContextProvider = ({
   // initOptions,
   children,
@@ -23,7 +42,14 @@ export const WheelContextProvider = ({
   // initOptions: WheelOption[],
   children: ReactNode,
 }) => {
-  const [wheelData, setWheelData] = useState<WheelOption[]>([{label: '', value: 0,}]);
+  const [wheelData, setWheelData] = useState<WheelOption[]>(() => {
+    const storage = localStorage.getItem('wheelData');
+    return storage ? JSON.parse(storage) : defaultOptions;
+  });
+  
+  useEffect(() => {
+    localStorage.setItem('wheelData', JSON.stringify(wheelData));
+  }, [wheelData])
 
   // useMemo on the context prevents the wheel from re-rendering when animated.
   const wheelContextMemo = useMemo(() => ({

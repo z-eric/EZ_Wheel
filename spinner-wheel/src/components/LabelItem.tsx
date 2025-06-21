@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { WheelOption } from "../contexts/WheelContext";
 
 interface LabelItemProps {
@@ -32,6 +32,12 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor 
       setWeightInput('f');
     }
   }
+
+  // For some reason the very first option to get rendered doesn't have it's
+  // value read properly if this is placed directly in the state initializer.
+  useEffect(() => {
+    setWeightInput(wheelOption.value.toString());
+  }, [wheelOption.value])
 
   return (
     <div style={{display: 'flex'}}>

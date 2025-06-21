@@ -1,29 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import WheelSpinner from './WheelSpinner';
 import LabelPanel from './LabelPanel';
-import { WheelContext, WheelContextProvider, WheelOption } from '../contexts/WheelContext';
-import { ThemeContext, ThemeContextProvider } from '../contexts/ThemeContext';
+import { WheelContext, WheelOption } from '../contexts/WheelContext';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const DEBUG_MODE = true;
-
-const defaultOptions: WheelOption[] = [
-  {
-    label: 'Welcome',
-    value: 3,
-  },
-  {
-    label: 'Spinner',
-    value: 3,
-  },
-  {
-    label: 'EZ',
-    value: 3,
-  },
-  {
-    label: 'to',
-    value: 3,
-  },
-]
 
 const debugOptions: WheelOption[] = [
   {
@@ -81,18 +62,12 @@ const debugOptions: WheelOption[] = [
   // },
 ];
 
-const initializeWheelData = () => {
-  return DEBUG_MODE ? debugOptions : defaultOptions;
-}
-
 const MainPanel = () => {
   const themeContext = useContext(ThemeContext);
   const wheelContext = useContext(WheelContext);
   // const [wheelData, setWheelData] = useState(initializeWheelData);
   const [isActive, setIsActive] = useState(false);
   const [winningLocation, setWinningLocation] = useState(0);
-
-  wheelContext.setData(initializeWheelData());
 
   const isActiveSetter = (active: boolean) => {
     setIsActive(active);
@@ -103,8 +78,14 @@ const MainPanel = () => {
     setWinningLocation(location);
   };
 
+  
+  const wheelReset = () => {
+    wheelContext.setData(debugOptions);
+  }
+
   return (
     <>
+      <button onClick={wheelReset}>dev reset</button>
       <div style={{
             // position: 'absolute',
           }}>
