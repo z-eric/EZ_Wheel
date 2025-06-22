@@ -104,6 +104,7 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number, theme: Theme
     <>
       {wedgePattern.map((optionIndex, wedgeIndex) => (
         <Wedge
+          themeClass={'default'}
           key={wedgeIndex}
           wheelRadius={wheelRadius}
           label={wheelData[optionIndex].label}
@@ -114,7 +115,9 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number, theme: Theme
           // color={wheelData[optionIndex].color ?? `hsl(${(360 / wheelData.length) * optionIndex} 50% 50%)`} // programmatic hue
           // color={wheelData[optionIndex].color ?? `hsl(250 50% ${100 - ((50 / wheelData.length) * optionIndex)}%)`} // programmatic lightness
           // color={wheelData[optionIndex].color ?? `hsl(${optionIndex % 2 === 0 ? '110' : '200'} 50% ${90 - ((70 / wheelData.length) * Math.floor(optionIndex / 2))}%)`} // programmatic lightness & dual hue
-          color={wheelData[optionIndex].color ?? theme.wedgeColors[optionIndex % theme.wedgeColors.length]} // theme
+          // color={wheelData[optionIndex].color ?? theme.wedgeColors[optionIndex % theme.wedgeColors.length]} // theme provider
+          
+          color={wheelData[optionIndex].color ?? `var(--wedge${optionIndex % 6})`} // theme
         />
       ))}
     </>

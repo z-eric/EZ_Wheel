@@ -3,6 +3,7 @@ import WheelSpinner from './WheelSpinner';
 import LabelPanel from './LabelPanel';
 import { WheelContext, WheelOption } from '../contexts/WheelContext';
 import { ThemeContext } from '../contexts/ThemeContext';
+import '../themes/themes.css';
 
 const DEBUG_MODE = true;
 
@@ -10,7 +11,7 @@ const debugOptions: WheelOption[] = [
   {
     label: '👺',
     value: 1,
-    // color: '#9a458a',
+    color: '#ba458a',
   },
   {
     label: '🤗',
@@ -77,6 +78,10 @@ const MainPanel = () => {
     // console.log('location ' + location)
     setWinningLocation(location);
   };
+
+  // const parseThemes = () => {
+  //   getComputedStyle(document.documentElement).g
+  // }
 
   
   const wheelReset = () => {

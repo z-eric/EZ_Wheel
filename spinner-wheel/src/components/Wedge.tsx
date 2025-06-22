@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface WedgeProps {
+  themeClass: string,
   wheelRadius: number,
   label: string,
   angle: number,
@@ -10,11 +11,12 @@ interface WedgeProps {
   color: string,
 }
 
-const Wedge = ({wheelRadius, label, angle, wedgeX, wedgeY, viewBox, color}: WedgeProps) => {
+const Wedge = ({themeClass, wheelRadius, label, angle, wedgeX, wedgeY, viewBox, color}: WedgeProps) => {
 
   return (
     <>
       <div
+        className={themeClass}
         style={{
           width: '100%',
           height: '100%',      
@@ -42,6 +44,11 @@ const Wedge = ({wheelRadius, label, angle, wedgeX, wedgeY, viewBox, color}: Wedg
           position: 'absolute',
           left: '50%',
           textAlign: 'right',
+          textShadow:
+            `1px 1px 2px #eee,
+            -1px -1px 2px #eee,
+            1px -1px 2px #eee,
+            -1px 1px 2px #eee`,
           fontSize: '150%',
           alignContent: 'center',
           paddingRight: '5%',

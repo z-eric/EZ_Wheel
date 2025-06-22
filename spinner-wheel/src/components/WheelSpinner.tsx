@@ -68,7 +68,7 @@ const WheelSpinner = ({isActive, isActiveSetter, winningLocationSetter}: WheelSp
       
       </div>  
       <br/>
-      <button onClick={spin} disabled={isActive} style={{position: 'absolute', top: 0}}>spin</button>
+      <button onClick={spin} disabled={isActive} style={{position: 'absolute', top: 0, right: 0}}>spin</button>
       <div style={{position: 'absolute', left: 0,}}>{rotation}</div>
     </>
   )

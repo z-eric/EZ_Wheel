@@ -1,0 +1,11 @@
+.default {
+  --primary: turquoise;
+  --secondary: teal;
+  --wedgeCount: 6;
+  --wedge0: red;
+  --wedge1: orange;
+  --wedge2: yellow;
+  --wedge3: green ;
+  --wedge4: blue;
+  --wedge5: purple;
+}

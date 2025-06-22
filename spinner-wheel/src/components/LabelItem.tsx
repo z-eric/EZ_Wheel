@@ -16,7 +16,7 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor 
         values means keystrokes may seem unresponsive and you can't clear the input.
     - Immediate update of the visual wheel state as valid input is typed.
     - Zeroing out the inputs on exit when left with invalid input. */
-  const [weightInput, setWeightInput] = useState(wheelOption.value.toString());
+  const [weightInput, setWeightInput] = useState('');
   const changeWeight = (value: string) => {
     setWeightInput(value);
     let weight = Number.parseInt(value);
@@ -37,7 +37,7 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor 
   // value read properly if this is placed directly in the state initializer.
   useEffect(() => {
     setWeightInput(wheelOption.value.toString());
-  }, [wheelOption.value])
+  }, [ wheelOption.value])
 
   return (
     <div style={{display: 'flex'}}>
@@ -55,7 +55,6 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor 
       <div onClick={(e) => handleColor(index)}
         title={`${wheelOption.color ? 'Custom Color' : 'Theme Auto Color'}`}
         style={{
-          // backgroundColor: `${wheelOption.color}`,
           background: `${wheelOption.color ?? 'linear-gradient(135deg, #FFF5 30%, #0005 70%)'}`,
           border: '1px solid black',
           display: 'inline-block',

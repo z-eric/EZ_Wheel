@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { WheelContext } from "../contexts/WheelContext";
 import LabelItem from "./LabelItem";
 
-const LabelPanel = () => {
+const LabelPanel = memo(() => {
   const wheelContext = useContext(WheelContext);
 
   const handleLabel = (text: string, index: number) => {
@@ -33,6 +33,6 @@ const LabelPanel = () => {
       ))}
     </div>
   )
-}
+})
 
 export default LabelPanel;
