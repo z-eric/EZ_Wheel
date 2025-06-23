@@ -7,9 +7,10 @@ interface LabelItemProps {
   handleLabel: (text: string, index: number) => void;
   handleWeight: (weight: number, index: number) => void;
   handleColor: (index: number) => void;
+  handleAddDelete: (index: number) => void;
 }
 
-const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor }: LabelItemProps) => {
+const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor, handleAddDelete }: LabelItemProps) => {
 
   /* This State creating an extra linkage between Context and the input allows:
     - Anything to be typed. Intuitive UI. Direct link to Context with disallowed
@@ -29,7 +30,7 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor 
   }
   const clearInvalidWeight = (value: string) => {
     if (wheelOption.value.toString() !== value) {
-      setWeightInput('f');
+      setWeightInput('0');
     }
   }
 
@@ -41,27 +42,50 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor 
 
   return (
     <div style={{display: 'flex'}}>
-      <input value={weightInput}
+      <input value={weightInput === '0' ? '' : weightInput}
         onChange={(e) => changeWeight(e.target.value)}
         onBlur={(e) => clearInvalidWeight(e.target.value)}
         style={{
           width: '2rem',
+          height: '2rem',
           border: '1px solid black',
-        }} />
+          boxSizing: 'border-box',
+          textAlign: 'center',
+          fontSize: '120%',
+        }}
+      />
       <input value={wheelOption.label} onChange={(e) => handleLabel(e.target.value, index)}
         style={{
+          height: '2rem',
           border: '1px solid black',
-        }} />
+          boxSizing: 'border-box',
+        }}
+      />
       <div onClick={(e) => handleColor(index)}
         title={`${wheelOption.color ? 'Custom Color' : 'Theme Auto Color'}`}
         style={{
           background: `${wheelOption.color ?? 'linear-gradient(135deg, #FFF5 30%, #0005 70%)'}`,
           border: '1px solid black',
+          boxSizing: 'border-box',
           display: 'inline-block',
-          width: '1rem',
-          height: '1rem',
-          paddingTop: '0.1rem',
-        }} />
+          width: '2rem',
+          height: '2rem',
+        }}
+      />
+      <div onClick={() => handleAddDelete(index)}
+        style={{
+          border: '1px solid black',
+          boxSizing: 'border-box',
+          display: 'inline-block',
+          width: '2rem',
+          height: '2rem',
+          textAlign: 'center',
+        }}>
+        <svg viewBox='0 0 10 10' fill='none' stroke={index === -1 ? 'green' : 'red'} strokeLinecap='round'>
+          {index === -1 ? <path d='M 5 2 v 6' /> : null}
+          <path d='M 2 5 h 6' />
+        </svg>
+      </div>
     </div>
   )
 }

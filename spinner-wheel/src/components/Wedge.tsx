@@ -20,10 +20,9 @@ const Wedge = ({themeClass, wheelRadius, label, angle, wedgeX, wedgeY, viewBox, 
         style={{
           width: '100%',
           height: '100%',      
-          transform: `rotate(${angle}deg)`,
+          rotate: `${angle}deg`,
           position: 'absolute',
         }}>
-      
         <svg width='100%' height='100%' viewBox={`0 0 ${viewBox} ${viewBox}`}>
           <path
             d={`M ${viewBox / 2} ${viewBox / 2}
@@ -37,23 +36,20 @@ const Wedge = ({themeClass, wheelRadius, label, angle, wedgeX, wedgeY, viewBox, 
       <div
         style={{
           width: '50%',
-          height: '100%',
-          transform: `rotate(${angle}deg)`,
-          transformOrigin: 'left',
+          height: '3rem',
+          rotate: `${angle + 180}deg`,
+          transformOrigin: 'right',
           boxSizing: 'border-box',
           position: 'absolute',
-          left: '50%',
-          textAlign: 'right',
+          top: 'calc(50% - 1.5rem)',
           textShadow:
             `1px 1px 2px #eee,
             -1px -1px 2px #eee,
             1px -1px 2px #eee,
             -1px 1px 2px #eee`,
           fontSize: '150%',
-          alignContent: 'center',
-          paddingRight: '5%',
-          // textOrientation: 'upright',
-          // writingMode: 'vertical-lr',
+          lineHeight: '3rem',
+          paddingLeft: '1rem',
       }}>
         {label}
       </div>

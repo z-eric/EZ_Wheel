@@ -28,6 +28,10 @@
   color: #61dafb;
 }
 
+/* * {
+   outline: 1px dotted violet;
+} */
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

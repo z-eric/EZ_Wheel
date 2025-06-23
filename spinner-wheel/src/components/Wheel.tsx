@@ -15,7 +15,7 @@ interface WheelProps {
   sendWedgePattern: (pattern: number[]) => void;
 }
 
-const wheelRadius = 10;
+const wheelRadius = 15;
 
 let wedgePattern: number[] = [];
 
@@ -104,7 +104,7 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number, theme: Theme
     <>
       {wedgePattern.map((optionIndex, wedgeIndex) => (
         <Wedge
-          themeClass={'default'}
+          themeClass={'default'} // TODO dynamic theme
           key={wedgeIndex}
           wheelRadius={wheelRadius}
           label={wheelData[optionIndex].label}
@@ -136,8 +136,8 @@ const Wheel = memo(({sendWedgePattern} : WheelProps) => {
       <div
         style={{
           position: 'relative',
-          width: '30rem',
-          height: '30rem',
+          width: '40rem',
+          height: '40rem',
         }}>
         {buildWedges(wheelContext.data, wheelRadius, themeContext.themes[themeContext.selectedTheme])}
       </div>

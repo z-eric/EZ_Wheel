@@ -15,7 +15,7 @@ let wedgePattern: number[];
 
 const findWinningOption = (winningDegree: number) => {
   // console.log('\nwin deg ' + winningDegree)
-  let normalized = (360 - winningDegree) / 360;
+  let normalized = (720 - winningDegree + 135) % 360 / 360;
   // console.log('normalized ' + normalized);
   let wedge = normalized * wedgePattern.length;
   // console.log('wedge ' + wedge)
@@ -59,7 +59,7 @@ const WheelSpinner = ({isActive, isActiveSetter, winningLocationSetter}: WheelSp
   return (
     <>
       <div style={{
-        // position: 'absolute',
+        // position: 'relative',
         transform: `rotate(${rotation}deg)`,
       }}>
         <Wheel
@@ -67,9 +67,8 @@ const WheelSpinner = ({isActive, isActiveSetter, winningLocationSetter}: WheelSp
         />
       
       </div>  
-      <br/>
       <button onClick={spin} disabled={isActive} style={{position: 'absolute', top: 0, right: 0}}>spin</button>
-      <div style={{position: 'absolute', left: 0,}}>{rotation}</div>
+      <div style={{position: 'absolute', left: 0, top: 0}}>{rotation}</div>
     </>
   )
 }
