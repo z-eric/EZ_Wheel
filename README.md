@@ -14,8 +14,8 @@ Big wedges aren't dramatic, gotta have little wedges.
 [] No adjacent duplicates (at all! (except when not enough others)).  
 [] Wheel scaling with viewport.  
 [] Mobile friendly.  
-[] Customizable wedge colors.  
-[] Built in theme options.  
+[X] Customizable wedge colors.  
+[X] Built in theme options.  
 [] Pointer "push back" simulation.  
 
 ## Things I learned
@@ -23,3 +23,5 @@ Big wedges aren't dramatic, gotta have little wedges.
 - Implementing useContext to pass things throughout a large component tree when State passing by props becomes unwieldy.
 - Tying useMemo into the context as well since subscribing to the context within the wheel made its own useMemo not work.
 - Linking Stateful Context to Local Storage.
+- SVG path drawing.
+- Canvas drawing.
