@@ -1,6 +1,9 @@
 import { memo, useContext, useState } from "react";
 import { WheelContext, WheelOption } from "../contexts/WheelContext";
 import LabelItem from "./LabelItem";
+import ColorPicker from "./ColorPicker";
+
+const MAX_INPUTS = 19;
 
 const LabelPanel = memo(() => {
   const wheelContext = useContext(WheelContext);
@@ -9,6 +12,30 @@ const LabelPanel = memo(() => {
     value: 1,
     color: undefined,
   })
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const [colorPicker, setColorPicker] = useState({
+    index: -2,
+    label: '',
+    color: '',
+  })
+
+  const handleShowColorPicker = (index: number) => {
+    if (index === -1) {
+      setColorPicker({
+        index: index,
+        label: newOption.label === '' ? 'New Option' : newOption.label,
+        color: newOption.color ?? 'X',
+      })
+    }
+    else {
+      setColorPicker({
+        index: index,
+        label: wheelContext.data[index].label,
+        color: wheelContext.data[index].color ?? `X${index}`, // weird fallback is to trigger random color
+      })
+    }
+    setShowColorPicker(true);
+  }
 
   const handleUpdateLabel = (text: string, index: number) => {
     if (index === -1) {
@@ -30,17 +57,22 @@ const LabelPanel = memo(() => {
       wheelContext.setData(newData);
     }
   }
-  const handleUpdateColor = (index: number) => {
+  const handleUpdateColor = (index: number, color: string | undefined) => {
+    setShowColorPicker(false);
+    if (index === -2) return; // just close dialog
     if (index === -1) {
+      setNewOption({ ...newOption, color: color})
     }
     else {
-      // TODO implement
-      console.log(index);
+      let newData = wheelContext.data.slice();
+      newData[index].color = color;
+      wheelContext.setData(newData);
     }
   }
   const handleAddDelete = (index: number) => {
     if (index === -1) {
-      if(newOption.label !== '') {
+      if (newOption.label !== '' // don't add blank
+        && wheelContext.data.length < MAX_INPUTS) {
         let newData = [...wheelContext.data, newOption];
         wheelContext.setData(newData);
         setNewOption({
@@ -57,30 +89,36 @@ const LabelPanel = memo(() => {
   }
 
   return (
-    <div style={{flexDirection: 'column'}}>
-      <div style={{ display: 'flex', marginBottom: '1rem' }}>
+    <div className='uipanel'
+      style={{
+      height: '46rem',
+      }}>
+      {showColorPicker && <ColorPicker
+        index={colorPicker.index}
+        label={colorPicker.label}
+        color={colorPicker.color}
+        onSelect={handleUpdateColor}
+      />}
+      <LabelItem
+        wheelOption={newOption}
+        index={-1} // -1 is the flag for the handle functions to work with the newOption 
+        handleLabel={handleUpdateLabel}
+        handleWeight={handleUpdateWeight}
+        handleColor={handleShowColorPicker}
+        handleAddDelete={handleAddDelete}
+      />
+      <div style={{height: '1rem'}} />
+      {wheelContext.data.map((wheelOption, i) => (
         <LabelItem
-          wheelOption={newOption}
-          index={-1} // -1 is the flag for the handle functions to work with the newOption 
+          key={i}
+          wheelOption={wheelOption}
+          index={i}
           handleLabel={handleUpdateLabel}
           handleWeight={handleUpdateWeight}
-          handleColor={handleUpdateColor}
+          handleColor={handleShowColorPicker}
           handleAddDelete={handleAddDelete}
         />
-      </div>
-      <div>
-        {wheelContext.data.map((wheelOption, i) => (
-          <LabelItem
-            key={i}
-            wheelOption={wheelOption}
-            index={i}
-            handleLabel={handleUpdateLabel}
-            handleWeight={handleUpdateWeight}
-            handleColor={handleUpdateColor}
-            handleAddDelete={handleAddDelete}
-          />
-        ))}
-      </div>
+      ))}
     </div>
   )
 })

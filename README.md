@@ -1,6 +1,6 @@
 # EZ Wheel
-Because I didn't like any that were out there, I made another!
-Big wedges aren't dramatic, gotta have little wedges.
+Because I didn't like any that were out there, I made another!  
+Big wedges aren't dramatic, gotta have little wedges.  
 
 ## MVP Features
 [X] Multiple wedges automatically created based on weights.  
@@ -11,7 +11,7 @@ Big wedges aren't dramatic, gotta have little wedges.
 ### Extended Features
 [] Automatic upscaling when total weights are low. (minimum wedge density)  
 [X] No adjacent duplicates (for most cases).  
-[] No adjacent duplicates (at all!).  
+[] No adjacent duplicates (at all! (except when not enough others)).  
 [] Wheel scaling with viewport.  
 [] Mobile friendly.  
 [] Customizable wedge colors.  

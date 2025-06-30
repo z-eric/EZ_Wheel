@@ -1,29 +1,44 @@
 export type Theme = {
-  wedgeColors: string[],
-  mainColors: {
-    primary: string,
-    secondary: string,
-    trim?: string,
-    highlight?: string,
-    selected?: string,
-  }
+  isCSS: boolean,
+  cssName: string,
+  numColors?: number,
+  hues?: string[],
+  // colors?: {
+  //   primary?: string,
+  //   secondary?: string,
+  //   trim?: string,
+  //   highlight?: string,
+  //   selected?: string,
+  // }
 }
 
-export const defaultTheme: Theme = {
-  wedgeColors: [
-    'red',
-    'orange',
-    'yellow',
-    'green',
-    'blue',
-    'purple',
+const defaultTheme: Theme = {
+  isCSS: true,
+  cssName: 'defaultTheme',
+  numColors: 10,
+  // colors: {
+  //   primary: 'turquoise',
+  //   secondary: 'teal',
+  // }
+}
+
+const testTheme: Theme = {
+  isCSS: true,
+  cssName: 'testTheme',
+  numColors: 7,
+}
+
+const lavender: Theme = {
+  isCSS: false,
+  cssName: 'lavenderHue',
+  hues: [
+    '260'
   ],
-  mainColors: {
-    primary: 'turquoise',
-    secondary: 'teal',
-  }
+
 }
 
 export const themeList = [
   defaultTheme,
+  testTheme,
+  lavender,
 ]

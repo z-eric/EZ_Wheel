@@ -48,7 +48,7 @@ const Wedge = ({themeClass, wheelRadius, label, angle, wedgeX, wedgeY, viewBox, 
             1px -1px 2px #eee,
             -1px 1px 2px #eee`,
           fontSize: '150%',
-          lineHeight: '3rem',
+          lineHeight: '2.8rem',
           paddingLeft: '1rem',
       }}>
         {label}

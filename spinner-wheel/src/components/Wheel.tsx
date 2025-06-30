@@ -117,7 +117,13 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number, theme: Theme
           // color={wheelData[optionIndex].color ?? `hsl(${optionIndex % 2 === 0 ? '110' : '200'} 50% ${90 - ((70 / wheelData.length) * Math.floor(optionIndex / 2))}%)`} // programmatic lightness & dual hue
           // color={wheelData[optionIndex].color ?? theme.wedgeColors[optionIndex % theme.wedgeColors.length]} // theme provider
           
-          color={wheelData[optionIndex].color ?? `var(--wedge${optionIndex % 6})`} // theme
+          // color={wheelData[optionIndex].color ?? `var(--wedge${optionIndex % theme.numColors})`} // theme
+          
+          // TODO support for multi-hue programmatic themes
+          color={wheelData[optionIndex].color ?? (theme.isCSS
+            ? `var(--wedge${optionIndex % (theme.numColors ?? 1)})` 
+            : `hsl(${theme.hues?.[0]} 50% ${100 - ((50 / wheelData.length) * optionIndex)}%)`
+          )}
         />
       ))}
     </>
@@ -136,8 +142,8 @@ const Wheel = memo(({sendWedgePattern} : WheelProps) => {
       <div
         style={{
           position: 'relative',
-          width: '40rem',
-          height: '40rem',
+          width: '36rem',
+          height: '36rem',
         }}>
         {buildWedges(wheelContext.data, wheelRadius, themeContext.themes[themeContext.selectedTheme])}
       </div>

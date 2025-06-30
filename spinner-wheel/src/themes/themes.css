@@ -1,11 +1,34 @@
-.default {
+.defaultTheme {
   --primary: turquoise;
   --secondary: teal;
-  --wedgeCount: 6;
+  --background: rgb(8, 68, 68);
   --wedge0: red;
   --wedge1: orange;
   --wedge2: yellow;
   --wedge3: green ;
   --wedge4: blue;
   --wedge5: purple;
+  --wedge6: indigo;
+  --wedge7: pink;
+  --wedge8: salmon;
+  --wedge9: limegreen;
+}
+
+.testTheme {
+  --primary: rgb(228, 33, 75);
+  --secondary: rgb(10, 136, 20);
+  --background: rgb(7, 92, 14);
+  --wedge0: red;
+  --wedge1: rgb(10, 136, 20);
+  --wedge2: rgb(51, 51, 51);
+  --wedge3: rgb(228, 33, 75);
+  --wedge4: green ;
+  --wedge5: rgb(82, 82, 82);
+  --wedge6: limegreen;
+}
+
+.lavenderHue {
+  --primary: hsl(260, 70%, 75%);
+  --secondary: hsl(250 50% 50%);
+  --background: hsl(250 50% 30%);
 }

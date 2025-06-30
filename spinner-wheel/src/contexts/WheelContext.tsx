@@ -22,7 +22,7 @@ const defaultOptions: WheelOption[] = [
     value: 3,
   },
   {
-    label: 'Spinner',
+    label: 'to',
     value: 3,
   },
   {
@@ -30,16 +30,14 @@ const defaultOptions: WheelOption[] = [
     value: 3,
   },
   {
-    label: 'to',
+    label: 'Spinner',
     value: 3,
   },
 ]
 
 export const WheelContextProvider = ({
-  // initOptions,
   children,
 }: {
-  // initOptions: WheelOption[],
   children: ReactNode,
 }) => {
   const [wheelData, setWheelData] = useState<WheelOption[]>(() => {
