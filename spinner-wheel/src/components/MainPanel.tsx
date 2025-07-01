@@ -24,6 +24,7 @@ const MainPanel = () => {
     spinRef.current?.startSpin();
   }
 
+  // turn off winner if the options are changed.
   useEffect(() => {
     setShowWinner(false);
   }, [wheelContext.data])
@@ -36,7 +37,11 @@ const MainPanel = () => {
       stars.push(
         <path
           key={i}
-          fill='var(--primary)' style={{ translate: '0 -0.75px' }}
+          style={{
+            translate: '0 -0.75px',
+            animation: '0.5s infinite alternate star-glow',
+            animationDelay: `-${Math.random()}s`,
+          }}
           d='M 0 0
           L .6 1.9
           L -.9 .6
@@ -144,7 +149,7 @@ const MainPanel = () => {
               A 19.5 19.5 0 0 1 33 6'
               /> */}
             <path  // winner panel
-              stroke='var(--primary)' strokeWidth='.5'
+              stroke={showWinner ? 'var(--primary)' : 'black'} strokeWidth='.5'
               d='M 12 4
               A 22 22 0 0 1 34 4
               A 2 2 0 0 1 32 8.5

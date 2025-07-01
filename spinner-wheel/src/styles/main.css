@@ -63,6 +63,11 @@
   }
 }
 
-/* html{
-  background-color: lightgray;
-} */
+@keyframes star-glow {
+  from {
+    fill: var(--primary);
+  }
+  to {
+    fill: white;
+  }
+}
