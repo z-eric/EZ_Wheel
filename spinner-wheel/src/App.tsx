@@ -1,23 +1,18 @@
 import './App.css';
-import MainPanel from './components/MainPanel';
-import Footer from './components/Footer';
-import { ThemeContextProvider } from './contexts/ThemeContext';
-import { WheelContextProvider } from './contexts/WheelContext';
 import './themes/themes.css';
 import './styles/main.css';
+import { ThemeContextProvider } from './contexts/ThemeContext';
+import { WheelContextProvider } from './contexts/WheelContext';
+import MainPanel from './components/MainPanel';
+import Footer from './components/Footer';
 import Header from './components/Header';
+import ThemeWrapper from './components/ThemeWrapper';
 
 function App() {
   return (
     <ThemeContextProvider>
       <WheelContextProvider>
-        <div style={{
-          minWidth: 'max-content',
-          height: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}>
+        <ThemeWrapper>
           <div
             style={{
               display: 'inline-block',
@@ -26,7 +21,7 @@ function App() {
             <MainPanel/>
             <Footer/>
           </div>
-        </div>
+        </ThemeWrapper>
       </WheelContextProvider>
     </ThemeContextProvider>
   );

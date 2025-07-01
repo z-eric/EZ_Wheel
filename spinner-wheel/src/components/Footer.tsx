@@ -10,7 +10,7 @@ const Footer = () => {
     wheelContext.setData(debugOptions);
   }
   return(
-    <div className={`head-foot ${themeContext.themes[themeContext.selectedTheme].cssName}`}
+    <div className='head-foot'
       style={{
         display: 'flex',
         marginTop: '0.5rem',

@@ -2,13 +2,10 @@ import { ReactElement, useContext, useEffect, useRef, useState } from 'react';
 import WheelSpinner, { WheelSpinRef } from './WheelSpinner';
 import LabelPanel from './LabelPanel';
 import { WheelContext } from '../contexts/WheelContext';
-import { ThemeContext } from '../contexts/ThemeContext';
 
   
 const MainPanel = () => {
-  const themeContext = useContext(ThemeContext);
   const wheelContext = useContext(WheelContext);
-  // const [wheelData, setWheelData] = useState(initializeWheelData);
   const [isActive, setIsActive] = useState(false);
   const [winningText, setWinningText] = useState('');
   const [showWinner, setShowWinner] = useState(false);
@@ -65,9 +62,7 @@ const MainPanel = () => {
   }
 
   return (
-    <>
-      <div className={`${themeContext.themes[themeContext.selectedTheme].cssName}`}
-        style={{ display: 'flex' }}>
+      <div style={{ display: 'flex' }}>
         <div className='uipanel'
           // Wheel Background
           style={{
@@ -281,11 +276,6 @@ const MainPanel = () => {
         </div>
         <LabelPanel />
       </div>
-      <div style={{display: 'flex'}}>
-        
-      </div>
-      {/* <p style={{position: 'absolute', top: '2em', left: '0'}}>Winner {wheelContext.data[winningLocation].label}</p> */}
-    </>
   );
 }
 
