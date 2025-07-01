@@ -69,11 +69,10 @@ const MainPanel = () => {
   return (
       <div style={{ display: 'flex' }}>
         <div className='uipanel'
-          // Wheel Background
+          // Wheel Panel
           style={{
             position: 'relative',
             width: '46rem',
-            // minWidth: '46rem',
             height: '46rem',
           }}
         >
@@ -122,32 +121,6 @@ const MainPanel = () => {
               A 19.5 19.5 0 0 1 42.5 23
               L 42.5 35'/>
             {showWinner && starGenerator(25)}
-            {/* {showWinner && <path  // Star
-              fill='var(--primary)' style={{ translate: '0 -0.75px' }}
-              d='M 0 0
-              L .6 1.9
-              L -.9 .6
-              L .9 .6
-              L -.6 1.9
-              Z'>
-              <animateTransform
-                type='rotate'
-                attributeName='transform'
-                attributeType='XML'
-                from='0 0 .84'
-                to='360 0 .84'
-                dur='2s'
-                repeatCount='indefinite'
-              />
-              <animateMotion dur='5s' repeatCount='indefinite' rotate='auto' begin='0.5s'>
-                <mpath href='#winnerArch'/>
-              </animateMotion>
-            </path>} */}
-            {/* <path  // winner panel single arc method
-              stroke='white' strokeWidth='5' strokeLinecap='round' fill='none'
-              d='M 13 6
-              A 19.5 19.5 0 0 1 33 6'
-              /> */}
             <path  // winner panel
               stroke={showWinner ? 'var(--primary)' : 'black'} strokeWidth='.5'
               d='M 12 4

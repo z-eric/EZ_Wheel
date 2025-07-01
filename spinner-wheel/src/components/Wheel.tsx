@@ -104,7 +104,6 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number, theme: Theme
     <>
       {wedgePattern.map((optionIndex, wedgeIndex) => (
         <Wedge
-          themeClass={'default'} // TODO dynamic theme
           key={wedgeIndex}
           wheelRadius={wheelRadius}
           label={wheelData[optionIndex].label}

@@ -15,11 +15,8 @@ export interface WheelSpinRef { startSpin: () => void }
 let wedgePattern: number[];
 
 const findWinningOption = (winningDegree: number) => {
-  // console.log('\nwin deg ' + winningDegree)
   let normalized = (720 - winningDegree + 135) % 360 / 360;
-  // console.log('normalized ' + normalized);
   let wedge = normalized * wedgePattern.length;
-  // console.log('wedge ' + wedge)
   wedge = Math.round(wedge)
   return wedgePattern[wedge === wedgePattern.length ? 0 : wedge];
 }

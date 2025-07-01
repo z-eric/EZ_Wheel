@@ -1,7 +1,4 @@
-import React from 'react';
-
 interface WedgeProps {
-  themeClass: string,
   wheelRadius: number,
   label: string,
   angle: number,
@@ -11,12 +8,11 @@ interface WedgeProps {
   color: string,
 }
 
-const Wedge = ({themeClass, wheelRadius, label, angle, wedgeX, wedgeY, viewBox, color}: WedgeProps) => {
+const Wedge = ({wheelRadius, label, angle, wedgeX, wedgeY, viewBox, color}: WedgeProps) => {
 
   return (
     <>
       <div
-        className={themeClass}
         style={{
           width: '100%',
           height: '100%',      
