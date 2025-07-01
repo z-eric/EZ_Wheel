@@ -1,4 +1,4 @@
-import { memo, useContext, useState } from "react";
+import { memo, MouseEvent, useContext, useState } from "react";
 import { WheelContext, WheelOption } from "../contexts/WheelContext";
 import LabelItem from "./LabelItem";
 import ColorPicker from "./ColorPicker";
@@ -17,14 +17,20 @@ const LabelPanel = memo(() => {
     index: -2,
     label: '',
     color: '',
+    top: 0,
+    left: 0,
   })
 
-  const handleShowColorPicker = (index: number) => {
+  const handleShowColorPicker = (event: MouseEvent<HTMLDivElement>, index: number) => {
+    let top = event.clientY;
+    let left = event.clientX;
     if (index === -1) {
       setColorPicker({
         index: index,
         label: newOption.label === '' ? 'New Option' : newOption.label,
         color: newOption.color ?? 'X',
+        top: top,
+        left: left,
       })
     }
     else {
@@ -32,6 +38,8 @@ const LabelPanel = memo(() => {
         index: index,
         label: wheelContext.data[index].label,
         color: wheelContext.data[index].color ?? `X${index}`, // weird fallback is to trigger random color
+        top: top,
+        left: left,
       })
     }
     setShowColorPicker(true);
@@ -97,6 +105,8 @@ const LabelPanel = memo(() => {
         index={colorPicker.index}
         label={colorPicker.label}
         color={colorPicker.color}
+        top={colorPicker.top}
+        left={colorPicker.left}
         onSelect={handleUpdateColor}
       />}
       <LabelItem

@@ -4,10 +4,12 @@ interface ColorPickerProps {
   index: number;
   label: string;
   color: string;
+  top: number;
+  left: number;
   onSelect: (index: number, color: string | undefined) => void;
 }
 
-const ColorPicker = ({ index, label, color, onSelect }: ColorPickerProps) => {
+const ColorPicker = ({ index, label, color, top, left, onSelect }: ColorPickerProps) => {
 
   const [hue, setHue] = useState<number>();
   const [sat, setSat] = useState<number>();
@@ -67,71 +69,58 @@ const ColorPicker = ({ index, label, color, onSelect }: ColorPickerProps) => {
   return (
     <div
       style={{
-        position: 'absolute',
-        // position: 'fixed',
-        // width: '100vw',
-        // height: '100vh',
-        // top: 0,
-        // left: 0,
-        zIndex: '999',
-        // backgroundColor: 'rgba(255, 255, 255, 50%)',
-      }}>
-      <div
+        position: 'fixed',
+        width: 'min-content',
+        top: `calc(${top}px - 1rem)`,
+        left: `${left}px`,
+        translate: '-110% 0',
+        backgroundColor: 'white',
+        border: '2px solid black',
+        borderRadius: '1rem',
+        padding: '0.5rem',
+    }}>
+      <b>{label}</b><br />
+      <div className='color-picker-button'
+        onClick={() => onSelect(index, undefined)}
         style={{
-          position: 'absolute',
-        // width: '100%',
-        // height: '100%',
-          top: '50%',
-          left: '50%',
-          // translate: '-50% -50%',
-          backgroundColor: 'white',
-          border: '2px solid black',
-          borderRadius: '1rem',
-          padding: '0.5rem',
-      }}>
-        <b>{label}</b><br />
-        <div className='color-picker-button'
-          onClick={() => onSelect(index, undefined)}
-          style={{
-            float: 'left',
-            width: '4rem',
-            height: '2rem',
-            margin: '0.5rem 0',
-            background: 'linear-gradient(135deg, #FFF5 30%, #0005 70%)',
-            lineHeight: '2rem',
-          }}>
-          Reset
-        </div>
-        <div className='color-picker-button'
-          onClick={() => onSelect(-2,'')}
-          style={{
-            float: 'right',
-            width: '4rem',
-            height: '2rem',
-            margin: '0.5rem 0',
-            lineHeight: '2rem',
-          }}>
-          Cancel
-        </div>
-        <canvas id='hueCanvas' onClick={handleHueClick} width='180' height='30'></canvas>
-        <canvas id='satCanvas' onClick={handleSatClick} width='180' height='20'></canvas>
-        <canvas id='lumCanvas' onClick={handleLumClick} width='180' height='20'></canvas>
-        <div className='color-picker-button'
-          onClick={() => onSelect(index, `hsl(${hue}, ${sat}%, ${lum}%)`)}
-          style={{
-          height: '3rem',
-          backgroundColor: `hsl(${hue}, ${sat}%, ${lum}%)`,
-          fontSize: '150%',
-          fontWeight: 'bold',
-          lineHeight: '2.8rem',
-          textShadow:
-            `1px 1px 2px #eee,
-            -1px -1px 2px #eee,
-            1px -1px 2px #eee,
-            -1px 1px 2px #eee`,
-          }}>
-          Select
-        </div>
+          float: 'left',
+          width: '4rem',
+          height: '2rem',
+          margin: '0.5rem 0',
+          background: 'linear-gradient(135deg, #FFF5 30%, #0005 70%)',
+          lineHeight: '2rem',
+        }}>
+        Reset
+      </div>
+      <div className='color-picker-button'
+        onClick={() => onSelect(-2,'')}
+        style={{
+          float: 'right',
+          width: '4rem',
+          height: '2rem',
+          margin: '0.5rem 0',
+          lineHeight: '2rem',
+        }}>
+        Cancel
+      </div>
+      <canvas id='hueCanvas' onClick={handleHueClick} width='180' height='30'></canvas>
+      <canvas id='satCanvas' onClick={handleSatClick} width='180' height='20'></canvas>
+      <canvas id='lumCanvas' onClick={handleLumClick} width='180' height='20'></canvas>
+      <div className='color-picker-button'
+        onClick={() => onSelect(index, `hsl(${hue}, ${sat}%, ${lum}%)`)}
+        style={{
+        height: '3rem',
+        backgroundColor: `hsl(${hue}, ${sat}%, ${lum}%)`,
+        fontSize: '150%',
+        fontWeight: 'bold',
+        lineHeight: '2.8rem',
+        textShadow:
+          `1px 1px 2px #eee,
+          -1px -1px 2px #eee,
+          1px -1px 2px #eee,
+          -1px 1px 2px #eee`,
+        }}>
+        Select
       </div>
     </div>
   )

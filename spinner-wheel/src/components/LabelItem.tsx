@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState } from "react";
 import { WheelOption } from "../contexts/WheelContext";
 
 interface LabelItemProps {
@@ -6,7 +6,7 @@ interface LabelItemProps {
   index: number;
   handleLabel: (text: string, index: number) => void;
   handleWeight: (weight: number, index: number) => void;
-  handleColor: (index: number) => void;
+  handleColor: (event: MouseEvent<HTMLDivElement>, index: number) => void;
   handleAddDelete: (index: number) => void;
 }
 
@@ -70,7 +70,7 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor,
         style={{
         }}
       />
-      <div onClick={(e) => handleColor(index)}
+      <div onClick={(e) => handleColor(e, index)}
         title={`${wheelOption.color ? 'Custom Color' : 'Auto Theme Color'}`}
         className='label-input'
         style={{
