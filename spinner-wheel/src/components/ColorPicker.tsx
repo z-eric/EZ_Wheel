@@ -76,7 +76,7 @@ const ColorPicker = ({ index, label, color, top, left, onSelect }: ColorPickerPr
         translate: '-110% 0',
         backgroundColor: 'white',
         border: '2px solid black',
-        borderRadius: '1rem',
+        borderRadius: '1rem 0 1rem 0',
         padding: '0.5rem',
     }}>
       <b>{label}</b><br />

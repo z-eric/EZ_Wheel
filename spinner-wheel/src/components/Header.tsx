@@ -2,11 +2,14 @@ const Header = () => {
   return (
     <div className='head-foot'
       style={{
-        height: '3rem',
+        // height: '3rem',
+        backgroundColor: 'white',
         marginBottom: '0.5rem',
-              
       }}>
-      HEADER TITLE
+      <span style={{
+        fontSize: '3rem',
+        fontStyle: 'italic',
+      }}>EZ WHEEL</span>
     </div>
   )
 };

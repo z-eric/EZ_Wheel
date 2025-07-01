@@ -24,4 +24,6 @@ Big wedges aren't dramatic, gotta have little wedges.
 - Tying useMemo into the context as well since subscribing to the context within the wheel made its own useMemo not work.
 - Linking Stateful Context to Local Storage.
 - SVG path drawing.
-- Canvas drawing.
+- Canvas drawing.  
+- Generating elements within functions and returning them to a parent they depend on (SVG paths).  
+- Conditionally rendered elements are (sometimes?) still "alive" even if behind a `<falsy> &&`.

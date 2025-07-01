@@ -13,6 +13,7 @@ const Footer = () => {
     <div className='head-foot'
       style={{
         display: 'flex',
+        backgroundColor: 'lightgray',
         marginTop: '0.5rem',
       }}
     >

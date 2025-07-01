@@ -19,12 +19,12 @@ const ThemeButton = ({theme, themeIndex}: ThemeButtonProps) => {
       onClick={selectTheme}
       style={{
         cursor: 'pointer',
-        background: `linear-gradient(135deg, var(--primary) ${theme.isCSS ? '50' : '30'}%, var(--secondary) ${theme.isCSS ? '50' : '70'}%`,
+        background: `linear-gradient(146deg, var(--primary) ${theme.isCSS ? '49' : '30'}%, var(--secondary) ${theme.isCSS ? '52' : '70'}%`,
         display: 'inline-block',
         width: '3rem',
         height: '2rem',
         border: '2px solid gray',
-        borderRadius: '1rem',
+        borderRadius: '1rem 0 1rem 0',
         margin: '0.2rem 0 0.2rem 0.2rem',
       }}>
         

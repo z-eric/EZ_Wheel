@@ -105,7 +105,7 @@ const LabelPanel = memo(() => {
   return (
     <div className='uipanel'
       style={{
-      height: '46rem',
+        height: '46rem',
       }}>
       {showColorPicker && <ColorPicker
         index={colorPicker.index}
@@ -115,6 +115,7 @@ const LabelPanel = memo(() => {
         left={colorPicker.left}
         onSelect={handleUpdateColor}
       />}
+      <div style={{height: '0.5rem'}} />
       <LabelItem
         wheelOption={newOption}
         index={-1} // -1 is the flag for the handle functions to work with the newOption 
