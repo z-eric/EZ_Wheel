@@ -51,6 +51,7 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor,
       margin: '0.2rem 0.5rem 0',
     }}>
       <input id={`weight${index}`}
+        maxLength={2}
         value={weightInput === '0' ? '' : weightInput}
         onChange={changeWeight}
         onBlur={clearInvalidWeight}
@@ -63,6 +64,7 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor,
         }}
       />
       <input id={`label${index}`}
+        maxLength={20}
         value={wheelOption.label}
         onChange={(e) => handleLabel(e.target.value, index)}
         onKeyDown={enterKeyPress}

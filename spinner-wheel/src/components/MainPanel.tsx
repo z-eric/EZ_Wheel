@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { ReactElement, useContext, useEffect, useRef, useState } from 'react';
 import WheelSpinner, { WheelSpinRef } from './WheelSpinner';
 import LabelPanel from './LabelPanel';
 import { WheelContext } from '../contexts/WheelContext';
@@ -32,6 +32,37 @@ const MainPanel = () => {
   }, [wheelContext.data])
 
   const spinRef = useRef<WheelSpinRef>(null);
+
+  const starGenerator = (num: number) => {
+    let stars: ReactElement[] = [];
+    for (let i = 0; i < num; i++){
+      stars.push(
+        <path
+          key={i}
+          fill='var(--primary)' style={{ translate: '0 -0.75px' }}
+          d='M 0 0
+          L .6 1.9
+          L -.9 .6
+          L .9 .6
+          L -.6 1.9
+          Z'>
+          <animateTransform
+            type='rotate'
+            attributeName='transform'
+            attributeType='XML'
+            from='0 0 .84'
+            to='360 0 .84'
+            dur={`${Math.random() + 1}s`}
+            repeatCount='indefinite'
+          />
+          <animateMotion dur='5s' repeatCount='indefinite' rotate='auto' begin={`${i*0.2}s`}>
+            <mpath href='#winnerArch'/>
+          </animateMotion>
+        </path>
+      )
+    }
+    return stars
+  }
 
   return (
     <>
@@ -85,7 +116,13 @@ const MainPanel = () => {
               L 3.5 23
               A 19.5 19.5 0 0 1 42.5 23
               L 42.5 35'/>
-            <path  // Star
+            <path fill='none' stroke='var(--background)' strokeWidth='2.5'
+              d='M 3.5 35
+              L 3.5 23
+              A 19.5 19.5 0 0 1 42.5 23
+              L 42.5 35'/>
+            {showWinner && starGenerator(25)}
+            {/* {showWinner && <path  // Star
               fill='var(--primary)' style={{ translate: '0 -0.75px' }}
               d='M 0 0
               L .6 1.9
@@ -105,7 +142,7 @@ const MainPanel = () => {
               <animateMotion dur='5s' repeatCount='indefinite' rotate='auto' begin='0.5s'>
                 <mpath href='#winnerArch'/>
               </animateMotion>
-            </path>
+            </path>} */}
             {/* <path  // winner panel single arc method
               stroke='white' strokeWidth='5' strokeLinecap='round' fill='none'
               d='M 13 6
@@ -120,17 +157,14 @@ const MainPanel = () => {
               A 2 2 0 0 1 12 4'
               />
             <text  // winner text
-              fill='black'
+              className='winner-text'
+              fill='white'
               style={{
                 fontWeight: 'bold',
-                fontSize: '3',
+                fontSize: `${winningText.length < 15 ? 3 : 2}`,
                 dominantBaseline: 'central',
                 textAlign: 'center',
-                textShadow:
-                  `2px 2px 5px var(--primary),
-                  -2px -2px 5px var(--primary),
-                  2px -2px 5px var(--primary),
-                  -2px 2px 5px var(--primary)`,
+                baselineShift: '0.15',
               }}>
               <textPath href='#winnerArch' startOffset='50%' textAnchor='middle'>
                 {showWinner && winningText}
@@ -206,11 +240,8 @@ const MainPanel = () => {
                 Z'
             />
           </svg>
-          {/* <button onClick={() => spinRef.current?.startSpin()} disabled={isActive} style={{ position: 'absolute', top: 0, right: 0 }}>
-            Spin
-          </button> */}
 
-          <svg 
+          <svg  // Spin button
             width='14rem' height='14rem'
             viewBox='0 0 14 14'
             style={{
@@ -219,7 +250,6 @@ const MainPanel = () => {
               bottom: '0',
               right: '0',
           }}>
-            
             <path fill='none' stroke='white' strokeWidth='0.3'
               d='M 7 3
               A 2.8 5 25 0 1 12 4
@@ -229,7 +259,7 @@ const MainPanel = () => {
             />
             <path
               onClick={() => { !isActive && handleClickSpin() }}
-              fill='var(--primary)' stroke='black' strokeWidth='0.15'
+              fill={isActive ? 'var(--secondary)' : 'var(--primary)'} stroke='black' strokeWidth='0.15'
               style={{ cursor: 'pointer' }}
               d='M 7 3
               A 2.8 5 25 0 1 12 4

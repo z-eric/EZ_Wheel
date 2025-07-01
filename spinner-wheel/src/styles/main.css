@@ -28,6 +28,44 @@
   text-align: center;
 }
 
+.winner-text {
+  animation: 1s infinite normal text-glow;
+}
+
+@keyframes text-glow {
+  0% {
+    text-shadow: 3px 3px 6px var(--primary);
+  }
+  12% {
+    text-shadow: 0px 4px 6px var(--primary);
+  }
+
+  25% {
+    text-shadow: -3px 3px 6px var(--primary);
+  }
+  37% {
+    text-shadow: -4px 0px 6px var(--primary);
+  }
+
+  50% {
+    text-shadow: -3px -3px 6px var(--primary);
+  }
+  62% {
+    text-shadow: 0px -4px 6px var(--primary);
+  }
+
+  75% {
+    text-shadow: 3px -3px 6px var(--primary);
+  }
+  87% {
+    text-shadow: 4px 0px 6px var(--primary);
+  }
+
+  100% {
+    text-shadow: 3px 3px 6px var(--primary);
+  }
+}
+
 /* html{
   background-color: lightgray;
 } */

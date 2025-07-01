@@ -21,6 +21,12 @@ const LabelPanel = memo(() => {
     left: 0,
   })
 
+  /** Handlers use an index to know what elements are making the call.
+   * Because option inputs are generated through array.map() they have indices >= 0.
+   * Therefore we can use the index -1 as a flag for an event coming from the new item input.
+   * This is necessary because the new item is held in local state limbo until finalized
+   * whereas the other ones are updating the context live.
+   */
   const handleShowColorPicker = (event: MouseEvent<HTMLDivElement>, index: number) => {
     let top = event.clientY;
     let left = event.clientX;
