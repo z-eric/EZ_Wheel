@@ -17,6 +17,7 @@ const ThemeButton = ({theme, themeIndex}: ThemeButtonProps) => {
   return (
     <div className={`${theme.cssName}`}
       onClick={selectTheme}
+      title={`${theme.niceName}`}
       style={{
         cursor: 'pointer',
         background: `linear-gradient(146deg, var(--primary) ${theme.isCSS ? '49' : '30'}%, var(--secondary) ${theme.isCSS ? '52' : '70'}%`,

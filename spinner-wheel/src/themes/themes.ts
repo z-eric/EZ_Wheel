@@ -1,6 +1,7 @@
 export type Theme = {
   isCSS: boolean,
   cssName: string,
+  niceName: string,
   numColors?: number,
   hues?: string[],
   // colors?: {
@@ -15,6 +16,7 @@ export type Theme = {
 const defaultTheme: Theme = {
   isCSS: true,
   cssName: 'defaultTheme',
+  niceName: 'Standard',
   numColors: 10,
   // colors: {
   //   primary: 'turquoise',
@@ -22,15 +24,17 @@ const defaultTheme: Theme = {
   // }
 }
 
-const testTheme: Theme = {
+const watermelonTheme: Theme = {
   isCSS: true,
-  cssName: 'testTheme',
-  numColors: 7,
+  cssName: 'watermelonTheme',
+  niceName: 'Watermelon',
+  numColors: 9,
 }
 
 const lavender: Theme = {
   isCSS: false,
   cssName: 'lavenderHue',
+  niceName: 'Purple Gradient',
   hues: [
     '260'
   ],
@@ -39,6 +43,6 @@ const lavender: Theme = {
 
 export const themeList = [
   defaultTheme,
-  testTheme,
+  watermelonTheme,
   lavender,
 ]

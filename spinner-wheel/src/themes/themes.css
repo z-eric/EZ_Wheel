@@ -14,7 +14,7 @@
   --wedge9: limegreen;
 }
 
-.testTheme {
+.watermelonTheme {
   --primary: rgb(228, 33, 75);
   --secondary: rgb(10, 136, 20);
   --background: rgb(7, 92, 14);
@@ -23,8 +23,10 @@
   --wedge2: rgb(51, 51, 51);
   --wedge3: rgb(228, 33, 75);
   --wedge4: green ;
-  --wedge5: rgb(82, 82, 82);
-  --wedge6: limegreen;
+  --wedge5: deeppink;
+  --wedge6: rgb(82, 82, 82);
+  --wedge7: rgb(243, 94, 57);
+  --wedge8: limegreen;
 }
 
 .lavenderHue {
