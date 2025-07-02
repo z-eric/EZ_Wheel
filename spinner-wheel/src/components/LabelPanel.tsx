@@ -97,8 +97,11 @@ const LabelPanel = memo(() => {
       }
     }
     else {
-      let newData = [...wheelContext.data.slice(0, index), ...wheelContext.data.slice(index + 1)];
-      wheelContext.setData(newData);
+      if (wheelContext.data.length > 2)
+      {
+        let newData = [...wheelContext.data.slice(0, index), ...wheelContext.data.slice(index + 1)];
+        wheelContext.setData(newData);
+      }
     }
   }
 
