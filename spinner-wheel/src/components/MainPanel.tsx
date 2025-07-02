@@ -38,22 +38,21 @@ const MainPanel = () => {
         <path
           key={i}
           style={{
-            translate: '0 -0.75px',
             animation: '0.5s infinite alternate star-glow',
             animationDelay: `-${Math.random()}s`,
           }}
-          d='M 0 0
-          L .6 1.9
-          L -.9 .6
-          L .9 .6
-          L -.6 1.9
+          d='M 0 -.9
+          L .6 1
+          L -.9 -.3
+          L .9 -.3
+          L -.6 1
           Z'>
           <animateTransform
             type='rotate'
             attributeName='transform'
             attributeType='XML'
-            from='0 0 .84'
-            to='360 0 .84'
+            from='0 0 0'
+            to='360 0 0'
             dur={`${Math.random() + 1}s`}
             repeatCount='indefinite'
           />
@@ -134,13 +133,11 @@ const MainPanel = () => {
               fill='white'
               style={{
                 fontWeight: 'bold',
-                fontSize: `${winningText.length < 15 ? 3 : 2}`,
-                dominantBaseline: 'central',
+                fontSize: `${winningText.length < 15 ? '20%' : '14%'}`,
                 textAlign: 'center',
-                baselineShift: '0.15',
               }}>
               <textPath href='#winnerArch' startOffset='50%' textAnchor='middle'>
-                {showWinner && winningText}
+                <tspan dy='1.2'>{showWinner && winningText}</tspan>
               </textPath>
             </text>
             <path // bottom left block
@@ -243,11 +240,10 @@ const MainPanel = () => {
             <path fill='none' id='spinText' d='M 3 10 A 18 18 0 0 0 10 3' />
             <text style={{
               pointerEvents: 'none',
-              fontSize: '4',
-              baselineShift: '-1.5',
+              fontSize: '30%',
             }}>
               <textPath href='#spinText' startOffset='50%' textAnchor='middle'>
-              SPIN
+                <tspan dy='1.6'>SPIN</tspan>
               </textPath>
             </text>
             </svg>
