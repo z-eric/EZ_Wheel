@@ -12,6 +12,7 @@ interface WheelSpinnerProps {
 
 export interface WheelSpinRef { startSpin: () => void }
 
+const SPIN_DURATION = 6000;
 let wedgePattern: number[];
 
 const findWinningOption = (winningDegree: number) => {
@@ -32,9 +33,9 @@ const WheelSpinner = forwardRef<WheelSpinRef, WheelSpinnerProps>((props, callSpi
 
   const spin = () => {
     isActiveSetter(true);
-    const distance = 4000 + (800 * Math.random()); // 1080 720?
-    const duration = 6000 * (0.2 * Math.random() + 0.9); // 6000?
-    setTimeout(winningLocationSetter, 6000, (findWinningOption((rotation + (distance * 0.5)) % 360)));
+    const distance = 4000 + (800 * Math.random());
+    const duration = SPIN_DURATION * (0.2 * Math.random() + 0.9);
+    setTimeout(winningLocationSetter, SPIN_DURATION, (findWinningOption((rotation + (distance * 0.5)) % 360)));
 
     let timeStarted: number;
     const turn = (callTime: number) => {
@@ -52,7 +53,7 @@ const WheelSpinner = forwardRef<WheelSpinRef, WheelSpinnerProps>((props, callSpi
         
     }
     requestAnimationFrame(turn);
-    setTimeout(isActiveSetter, 1500, false);
+    setTimeout(isActiveSetter, SPIN_DURATION, false);
   }
 
   useImperativeHandle(callSpin, () => ({

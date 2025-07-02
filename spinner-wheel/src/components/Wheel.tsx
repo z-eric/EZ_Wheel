@@ -115,7 +115,7 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number, theme: Theme
             ? `var(--wedge${optionIndex % (theme.numColors ?? 1)})` 
             : theme.hues?.length === 0
               ? `hsl(${(360 / wheelData.length) * optionIndex} 70% 50%)` // programmatic full hue spread
-              : `hsl(${theme.hues?.[optionIndex % theme.hues.length]} 80% ${(theme.lightLevel ?? 90) - ((70 / wheelData.length) * Math.floor(optionIndex / 2))}%)` // programmatic lightness per hue
+              : `hsl(${theme.hues?.[optionIndex % theme.hues.length]} 80% ${(theme.lightLevel ?? 90) - ((50 / wheelData.length) * Math.floor(optionIndex / (theme.hues?.length ?? 1)))}%)` // programmatic lightness per hue
           )}
         />
       ))}

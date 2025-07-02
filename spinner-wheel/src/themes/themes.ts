@@ -56,7 +56,7 @@ const sunset: Theme = {
     '30',
     '50',
   ],
-  lightLevel: 80,
+  lightLevel: 70,
 }
 
 const autoRainbow: Theme = {

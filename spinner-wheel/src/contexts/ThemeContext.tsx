@@ -20,12 +20,13 @@ export const ThemeContextProvider = ({
   children: ReactNode,
   }) => {
   const [selectedTheme, setSelectedTheme] = useState(() => {
-    const storage = localStorage.getItem('selectedTheme');
-    return storage ? Number.parseInt(storage) : 0;
+    const storage = thm.themeList.findIndex(t => t.cssName === localStorage.getItem('selectedTheme'));
+    return storage !== -1 ? storage : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem('selectedTheme', selectedTheme.toString());
+    
+    localStorage.setItem('selectedTheme', thm.themeList[selectedTheme].cssName ?? 0);
   }, [selectedTheme])
 
   const themeMemo = useMemo(() => ({
