@@ -32,9 +32,9 @@ const WheelSpinner = forwardRef<WheelSpinRef, WheelSpinnerProps>((props, callSpi
 
   const spin = () => {
     isActiveSetter(true);
-    const distance = 720 + (360 * Math.random()); // 1080 720?
-    const duration = 1500 * (0.2 * Math.random() + 0.9); // 6000?
-    setTimeout(winningLocationSetter, 1500, (findWinningOption((rotation + (distance * 0.5)) % 360)));
+    const distance = 4000 + (800 * Math.random()); // 1080 720?
+    const duration = 6000 * (0.2 * Math.random() + 0.9); // 6000?
+    setTimeout(winningLocationSetter, 6000, (findWinningOption((rotation + (distance * 0.5)) % 360)));
 
     let timeStarted: number;
     const turn = (callTime: number) => {
