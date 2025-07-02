@@ -7,6 +7,7 @@ const ThemeWrapper = ({children}:{children: ReactNode}) => {
     <div className={`${themeContext.themes[themeContext.selectedTheme].cssName}`}
       style={{
         minWidth: 'max-content',
+        minHeight: 'min-content',
         height: '100vh',
         display: 'flex',
         alignItems: 'center',

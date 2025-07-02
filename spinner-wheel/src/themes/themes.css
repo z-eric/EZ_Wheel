@@ -1,17 +1,17 @@
 .defaultTheme {
-  --primary: turquoise;
-  --secondary: teal;
-  --background: rgb(8, 68, 68);
+  --primary: rgb(64, 241, 241);
+  --secondary: rgb(15, 79, 161);
+  --background: rgb(9, 97, 53);
   --wedge0: red;
-  --wedge1: orange;
+  --wedge1: blue;
   --wedge2: yellow;
-  --wedge3: green ;
-  --wedge4: blue;
+  --wedge3: green;
+  --wedge4: orange;
   --wedge5: purple;
-  --wedge6: indigo;
-  --wedge7: pink;
-  --wedge8: salmon;
-  --wedge9: limegreen;
+  --wedge6: #222;
+  --wedge7: white;
+  --wedge8: gray;
+  --wedge9: brown;
 }
 
 .watermelonTheme {
@@ -29,8 +29,50 @@
   --wedge8: limegreen;
 }
 
+.oceanTheme {
+  --primary: rgb(64, 187, 224);
+  --secondary: rgb(22, 101, 146);
+  --background: rgb(8, 46, 68);
+  --wedge0: rgb(0, 132, 255);
+  --wedge1: rgb(0, 255, 136);
+  --wedge2: rgb(9, 111, 207);
+  --wedge3: rgb(9, 62, 177) ;
+  --wedge4: blue;
+  --wedge5: rgb(47, 161, 206);
+  --wedge6: rgb(32, 202, 159);
+  --wedge7: rgb(127, 243, 204);
+  --wedge8: rgb(114, 241, 250);
+  --wedge9: rgb(69, 104, 199);
+}
+
+.bananaTheme {
+  --primary: rgb(245, 233, 74);
+  --secondary: rgb(121, 115, 96);
+  --background: rgb(54, 42, 27);
+  --wedge0: rgb(255, 255, 255);
+  --wedge1: rgb(194, 189, 185);
+  --wedge2: rgb(199, 183, 182);
+  --wedge3: rgb(158, 101, 63) ;
+  --wedge4: rgb(129, 34, 28);
+  --wedge5: rgb(221, 219, 103);
+  --wedge6: rgb(176, 202, 32);
+  --wedge7: rgb(175, 170, 127);
+}
+
 .lavenderHue {
   --primary: hsl(260, 70%, 75%);
   --secondary: hsl(250 50% 50%);
   --background: hsl(250 50% 30%);
+}
+
+.sunsetHue {
+  --primary: hsl(54, 70%, 51%);
+  --secondary: hsl(44, 90%, 41%);
+  --background: hsl(22, 84%, 33%);
+}
+
+.autoRainbow {
+  --primary: hsl(147, 61%, 53%);
+  --secondary: hsl(0, 0%, 51%);
+  --background: hsl(0, 0%, 25%);
 }

@@ -4,24 +4,14 @@ export type Theme = {
   niceName: string,
   numColors?: number,
   hues?: string[],
-  // colors?: {
-  //   primary?: string,
-  //   secondary?: string,
-  //   trim?: string,
-  //   highlight?: string,
-  //   selected?: string,
-  // }
+  lightLevel?: number,
 }
 
 const defaultTheme: Theme = {
   isCSS: true,
   cssName: 'defaultTheme',
-  niceName: 'Standard',
+  niceName: 'Circus Wheel',
   numColors: 10,
-  // colors: {
-  //   primary: 'turquoise',
-  //   secondary: 'teal',
-  // }
 }
 
 const watermelonTheme: Theme = {
@@ -31,18 +21,57 @@ const watermelonTheme: Theme = {
   numColors: 9,
 }
 
+const oceanTheme: Theme = {
+  isCSS: true,
+  cssName: 'oceanTheme',
+  niceName: 'Ocean',
+  numColors: 10,
+}
+
+const bananaTheme: Theme = {
+  isCSS: true,
+  cssName: 'bananaTheme',
+  niceName: 'Banana',
+  numColors: 8,
+}
+
 const lavender: Theme = {
   isCSS: false,
   cssName: 'lavenderHue',
   niceName: 'Purple Gradient',
   hues: [
-    '260'
+    '260',
+    '240',
+    '270',
   ],
 
+}
+
+const sunset: Theme = {
+  isCSS: false,
+  cssName: 'sunsetHue',
+  niceName: 'Sunset Gradient',
+  hues: [
+    '0',
+    '30',
+    '50',
+  ],
+  lightLevel: 80,
+}
+
+const autoRainbow: Theme = {
+  isCSS: false,
+  cssName: 'autoRainbow',
+  niceName: 'Automatic Rainbow',
+  hues: [],
 }
 
 export const themeList = [
   defaultTheme,
   watermelonTheme,
+  oceanTheme,
+  bananaTheme,
+  autoRainbow,
   lavender,
+  sunset,
 ]

@@ -111,17 +111,11 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number, theme: Theme
           wedgeX={wedgeX}
           wedgeY={wedgeY}
           viewBox={viewBox}
-          // color={wheelData[optionIndex].color ?? `hsl(${(360 / wheelData.length) * optionIndex} 50% 50%)`} // programmatic hue
-          // color={wheelData[optionIndex].color ?? `hsl(250 50% ${100 - ((50 / wheelData.length) * optionIndex)}%)`} // programmatic lightness
-          // color={wheelData[optionIndex].color ?? `hsl(${optionIndex % 2 === 0 ? '110' : '200'} 50% ${90 - ((70 / wheelData.length) * Math.floor(optionIndex / 2))}%)`} // programmatic lightness & dual hue
-          // color={wheelData[optionIndex].color ?? theme.wedgeColors[optionIndex % theme.wedgeColors.length]} // theme provider
-          
-          // color={wheelData[optionIndex].color ?? `var(--wedge${optionIndex % theme.numColors})`} // theme
-          
-          // TODO support for multi-hue programmatic themes
           color={wheelData[optionIndex].color ?? (theme.isCSS
             ? `var(--wedge${optionIndex % (theme.numColors ?? 1)})` 
-            : `hsl(${theme.hues?.[0]} 50% ${100 - ((50 / wheelData.length) * optionIndex)}%)`
+            : theme.hues?.length === 0
+              ? `hsl(${(360 / wheelData.length) * optionIndex} 70% 50%)` // programmatic full hue spread
+              : `hsl(${theme.hues?.[optionIndex % theme.hues.length]} 80% ${(theme.lightLevel ?? 90) - ((70 / wheelData.length) * Math.floor(optionIndex / 2))}%)` // programmatic lightness per hue
           )}
         />
       ))}

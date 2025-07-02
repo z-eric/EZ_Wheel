@@ -20,7 +20,7 @@ const ThemeButton = ({theme, themeIndex}: ThemeButtonProps) => {
       title={`${theme.niceName}`}
       style={{
         cursor: 'pointer',
-        background: `linear-gradient(146deg, var(--primary) ${theme.isCSS ? '49' : '30'}%, var(--secondary) ${theme.isCSS ? '52' : '70'}%`,
+        background: `linear-gradient(146deg, var(--primary) ${theme.isCSS ? '49' : '30'}%, var(--background) ${theme.isCSS ? '52' : '70'}%`,
         display: 'inline-block',
         width: '3rem',
         height: '2rem',

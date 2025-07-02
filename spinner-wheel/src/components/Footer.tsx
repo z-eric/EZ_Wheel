@@ -15,9 +15,10 @@ const Footer = () => {
         display: 'flex',
         backgroundColor: 'lightgray',
         marginTop: '0.5rem',
+        fontSize: '100%',
       }}
     >
-      Themes
+      <span style={{ margin: '0.5rem 0 0 0.5rem'}}>Themes</span>
       {themeContext.themes.map((theme, i) => (
         <ThemeButton theme={theme} themeIndex={i} key={i} />
       ))}
