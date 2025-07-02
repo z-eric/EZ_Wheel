@@ -30,7 +30,7 @@ const defaultOptions: WheelOption[] = [
     value: 3,
   },
   {
-    label: 'Spinner',
+    label: 'Wheel',
     value: 3,
   },
 ]
