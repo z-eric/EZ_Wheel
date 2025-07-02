@@ -35,7 +35,7 @@ const WheelSpinner = forwardRef<WheelSpinRef, WheelSpinnerProps>((props, callSpi
     isActiveSetter(true);
     const distance = 4000 + (800 * Math.random());
     const duration = SPIN_DURATION * (0.2 * Math.random() + 0.9);
-    setTimeout(winningLocationSetter, SPIN_DURATION, (findWinningOption((rotation + (distance * 0.5)) % 360)));
+    setTimeout(winningLocationSetter, SPIN_DURATION + 200, (findWinningOption((rotation + (distance * 0.5)) % 360)));
 
     let timeStarted: number;
     const turn = (callTime: number) => {
@@ -53,7 +53,7 @@ const WheelSpinner = forwardRef<WheelSpinRef, WheelSpinnerProps>((props, callSpi
         
     }
     requestAnimationFrame(turn);
-    setTimeout(isActiveSetter, SPIN_DURATION, false);
+    setTimeout(isActiveSetter, SPIN_DURATION + 200, false);
   }
 
   useImperativeHandle(callSpin, () => ({
