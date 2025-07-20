@@ -14,12 +14,12 @@ const defaultTheme: Theme = {
   numColors: 10,
 }
 
-const watermelonTheme: Theme = {
-  isCSS: true,
-  cssName: 'watermelonTheme',
-  niceName: 'Watermelon',
-  numColors: 8,
-}
+// const watermelonTheme: Theme = {
+//   isCSS: true,
+//   cssName: 'watermelonTheme',
+//   niceName: 'Watermelon',
+//   numColors: 8,
+// }
 
 const oceanTheme: Theme = {
   isCSS: true,
