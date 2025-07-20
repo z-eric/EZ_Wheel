@@ -16,7 +16,9 @@ Big wedges aren't dramatic, gotta have little wedges.
 [ ] Mobile friendly.  
 [x] Customizable wedge colors.  
 [x] Built in theme options.  
-[ ] Pointer "push back" simulation.  
+[ ] Fully custom theme slot.
+~~[ ] Pointer "push back" simulation.~~  
+[ ] Settings (duration/toggle/speed/etc).
 
 ## Things I learned
 - Implementing memo to prevent the wheel from re-rendering while animating.

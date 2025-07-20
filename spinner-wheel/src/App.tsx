@@ -4,7 +4,7 @@ import './styles/main.css';
 import { ThemeContextProvider } from './contexts/ThemeContext';
 import { WheelContextProvider } from './contexts/WheelContext';
 import MainPanel from './components/MainPanel';
-import Footer from './components/Footer';
+import ThemeBar from './components/ThemeBar';
 import Header from './components/Header';
 import ThemeWrapper from './components/ThemeWrapper';
 
@@ -19,7 +19,7 @@ function App() {
             }}>
             <Header/>
             <MainPanel/>
-            <Footer/>
+            <ThemeBar/>
           </div>
         </ThemeWrapper>
       </WheelContextProvider>

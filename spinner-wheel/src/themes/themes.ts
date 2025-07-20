@@ -18,7 +18,7 @@ const watermelonTheme: Theme = {
   isCSS: true,
   cssName: 'watermelonTheme',
   niceName: 'Watermelon',
-  numColors: 9,
+  numColors: 8,
 }
 
 const oceanTheme: Theme = {
@@ -38,7 +38,7 @@ const bananaTheme: Theme = {
 const lavender: Theme = {
   isCSS: false,
   cssName: 'lavenderHue',
-  niceName: 'Purple Gradient',
+  niceName: 'Lavender',
   hues: [
     '260',
     '240',
@@ -47,31 +47,60 @@ const lavender: Theme = {
 
 }
 
-const sunset: Theme = {
-  isCSS: false,
-  cssName: 'sunsetHue',
-  niceName: 'Sunset Gradient',
-  hues: [
-    '0',
-    '30',
-    '50',
-  ],
-  lightLevel: 70,
-}
-
 const autoRainbow: Theme = {
   isCSS: false,
   cssName: 'autoRainbow',
-  niceName: 'Automatic Rainbow',
+  niceName: 'Full Spectrum',
   hues: [],
+}
+
+const dracula: Theme = {
+  isCSS: false,
+  cssName: 'draculaHue',
+  niceName: 'Dracula',
+  hues: [
+    '353',
+  ],
+  lightLevel: 60,
+}
+
+const paintingONM: Theme = {
+  isCSS: true,
+  cssName: 'paintingONM',
+  niceName: 'Oak November Moon',
+  numColors: 8,
+}
+
+const paintingNRRL: Theme = {
+  isCSS: true,
+  cssName: 'paintingNRRL',
+  niceName: 'Night Red Rock Lake',
+  numColors: 8,
+}
+
+const meadow: Theme = {
+  isCSS: false,
+  cssName: 'meadowHue',
+  niceName: 'Meadow',
+  hues: [
+    '100',
+    '110',
+    '90',
+    '280',
+    '55',
+  ],
+  lightLevel: 40,
 }
 
 export const themeList = [
   defaultTheme,
-  watermelonTheme,
-  oceanTheme,
   bananaTheme,
-  autoRainbow,
+  oceanTheme,
+  paintingONM,
+  paintingNRRL,
+  //watermelonTheme,
+  meadow,
   lavender,
-  sunset,
+  dracula,
+  autoRainbow,
 ]
