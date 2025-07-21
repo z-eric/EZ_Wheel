@@ -121,7 +121,7 @@ const MainPanel = () => {
               L 42.5 35'/>
             {showWinner && starGenerator(25)}
             <path  // winner panel
-              stroke={showWinner ? 'var(--primary)' : 'black'} strokeWidth='.5'
+              stroke={showWinner ? 'var(--highlight)' : 'black'} strokeWidth='.5'
               d='M 12 4
               A 22 22 0 0 1 34 4
               A 2 2 0 0 1 32 8.5
@@ -174,7 +174,7 @@ const MainPanel = () => {
                 a 3.2 3.2 0 1 1 0 6 
                 Z'
             />
-            <path fill='var(--primary)' stroke='black' strokeWidth='0.15'
+            <path fill='var(--highlight)' stroke='black' strokeWidth='0.15'
               d='M 0 5
                 L 3.5 3.5
                 L 7 2 
@@ -229,7 +229,7 @@ const MainPanel = () => {
             />
             <path
               onClick={() => { !isActive && handleClickSpin() }}
-              fill={isActive ? 'var(--secondary)' : 'var(--primary)'} stroke='black' strokeWidth='0.15'
+              fill={isActive ? 'var(--primary)' : 'var(--highlight)'} stroke='black' strokeWidth='0.15'
               style={{ cursor: 'pointer' }}
               d='M 7 3
               A 2.8 5 25 0 1 12 4
@@ -248,7 +248,7 @@ const MainPanel = () => {
             </text>
             </svg>
         </div>
-        <LabelPanel />
+        <LabelPanel isActive={isActive} />
       </div>
   );
 }

@@ -5,7 +5,11 @@ import ColorPicker from "./ColorPicker";
 
 const MAX_INPUTS = 19;
 
-const LabelPanel = memo(() => {
+interface LabelPanelProps {
+  isActive: boolean
+}
+
+const LabelPanel = memo(({isActive}: LabelPanelProps) => {
   const wheelContext = useContext(WheelContext);
   const [newOption, setNewOption] = useState<WheelOption>({
     label: '',
@@ -28,6 +32,7 @@ const LabelPanel = memo(() => {
    * whereas the other ones are updating the context live.
    */
   const handleShowColorPicker = (event: MouseEvent<HTMLDivElement>, index: number) => {
+    if (isActive) return; //locks inputs while spinning
     let top = event.clientY;
     let left = event.clientX;
     if (index === -1) {
@@ -52,6 +57,7 @@ const LabelPanel = memo(() => {
   }
 
   const handleUpdateLabel = (text: string, index: number) => {
+    if (isActive) return; //locks inputs while spinning
     if (index === -1) {
       setNewOption({ ...newOption, label: text });
     }
@@ -62,6 +68,7 @@ const LabelPanel = memo(() => {
     }
   }
   const handleUpdateWeight = (weight: number, index: number) => {
+    if (isActive) return; //locks inputs while spinning
     if (index === -1) {
       setNewOption({ ...newOption, value: weight });
     }
@@ -73,7 +80,7 @@ const LabelPanel = memo(() => {
   }
   const handleUpdateColor = (index: number, color: string | undefined) => {
     setShowColorPicker(false);
-    if (index === -2) return; // just close dialog
+    if (index === -2) return; // index sent by cancel button, just close dialog
     if (index === -1) {
       setNewOption({ ...newOption, color: color})
     }
@@ -84,6 +91,7 @@ const LabelPanel = memo(() => {
     }
   }
   const handleAddDelete = (index: number) => {
+    if (isActive) return; //locks inputs while spinning
     if (index === -1) {
       if (newOption.label !== '' // don't add blank
         && wheelContext.data.length < MAX_INPUTS) {

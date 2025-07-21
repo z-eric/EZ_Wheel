@@ -31,41 +31,41 @@
 
 @keyframes text-glow {
   0% {
-    text-shadow: 3px 3px 6px var(--primary);
+    text-shadow: 3px 3px 6px var(--highlight);
   }
   12% {
-    text-shadow: 0px 4px 6px var(--primary);
+    text-shadow: 0px 4px 6px var(--highlight);
   }
 
   25% {
-    text-shadow: -3px 3px 6px var(--primary);
+    text-shadow: -3px 3px 6px var(--highlight);
   }
   37% {
-    text-shadow: -4px 0px 6px var(--primary);
+    text-shadow: -4px 0px 6px var(--highlight);
   }
 
   50% {
-    text-shadow: -3px -3px 6px var(--primary);
+    text-shadow: -3px -3px 6px var(--highlight);
   }
   62% {
-    text-shadow: 0px -4px 6px var(--primary);
+    text-shadow: 0px -4px 6px var(--highlight);
   }
 
   75% {
-    text-shadow: 3px -3px 6px var(--primary);
+    text-shadow: 3px -3px 6px var(--highlight);
   }
   87% {
-    text-shadow: 4px 0px 6px var(--primary);
+    text-shadow: 4px 0px 6px var(--highlight);
   }
 
   100% {
-    text-shadow: 3px 3px 6px var(--primary);
+    text-shadow: 3px 3px 6px var(--highlight);
   }
 }
 
 @keyframes star-glow {
   from {
-    fill: var(--primary);
+    fill: var(--highlight);
   }
   to {
     fill: white;
