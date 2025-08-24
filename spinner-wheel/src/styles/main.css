@@ -29,6 +29,29 @@
   animation: 1s infinite normal text-glow;
 }
 
+.setting-row {
+  display: flex;
+  margin: 0.5rem 1rem;
+  border: 2px solid var(--secondary);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  padding: 0.2rem 0.5rem;
+}
+
+.setting-row > label {
+  width: 8rem;
+}
+
+.setting-row > input {
+  flex-grow: 1;
+}
+
+.setting-row > span {
+  width: 6rem;
+  text-align: right;
+}
+
 @keyframes text-glow {
   0% {
     text-shadow: 3px 3px 6px var(--highlight);

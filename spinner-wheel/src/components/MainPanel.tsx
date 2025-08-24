@@ -78,15 +78,26 @@ const MainPanel = () => {
           height: '46rem',
       }}>
         <div // Settings button
+          className='label-input'
           style={{
             position: 'absolute',
             right: '0',
-            margin: '1rem',
+            width: '2rem',
+            height: '2rem',
+            margin: '0.7rem',
+            padding: '0.1rem',
             cursor: 'pointer',
           }}
           onClick={() => {if (!isActive) setShowSettings(true)}}
         >
-          ⚙️
+          <svg viewBox='0 0 10 10' stroke='gray' strokeWidth='1.2' strokeLinecap='round'>
+            <path d='M 5 1 v 8'/>
+            <path d='M 1 5 h 8'/>
+            <path d='M 2.2 2.2 L 7.8 7.8'/>
+            <path d='M 2.2 7.8 L 7.8 2.2' />
+            <circle cx='5' cy='5' r='2.7'/>
+            <circle cx='5' cy='5' r='2' fill='white'/>
+          </svg>
         </div>
         <svg viewBox='0 0 46 46'>
           <path // bottom  block

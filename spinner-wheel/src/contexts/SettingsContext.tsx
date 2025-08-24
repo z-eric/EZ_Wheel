@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
 export type SettingsContextType = {
   spinModifier: number,
@@ -15,7 +15,14 @@ export const SettingsContextProvider = ({
 }: {
   children: ReactNode,
   }) => {
-  const [spinModifier, setSpinModifier] = useState(0);
+  const [spinModifier, setSpinModifier] = useState(() => {
+    const storage = localStorage.getItem('spinModifier');
+    return storage ? Number.parseInt(storage) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('spinModifier', spinModifier.toString());
+  }, [spinModifier]);
   
   return (
     <SettingsContext.Provider value={{spinModifier, setSpinModifier}}>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SettingsContext } from "../contexts/SettingsContext";
 
 interface SettingsModalProps {
@@ -7,6 +7,11 @@ interface SettingsModalProps {
 
 const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
   const settingsContext = useContext(SettingsContext);
+
+  const [spinValue, setSpinValue] = useState(settingsContext.spinModifier / 1000 + 6);
+  useEffect(() => {
+    settingsContext.setSpinModifier((spinValue - 6) * 1000);
+  })
 
   return (
     <div style={{
@@ -20,15 +25,39 @@ const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
       <div className="uipanel"
         style={{
           position: 'fixed',
-          width: '80%',
-          height: '20%',
+          width: '30rem',
           top: '20%',
-          left: '10%',
+          left: '50%',
+          translate: '-50% 0',
           boxShadow: '0.3rem 0.3rem 1rem #000',
       }}>
-        <div onClick={() => setShowSettings(false)}>
-          💀
-          {settingsContext.spinModifier}
+        <div style={{display: 'flex', margin: '0.5rem 0.5rem 0 1rem'}}>
+          <div style={{flexGrow: '1'}}><b>Settings</b></div>
+          <div style={{
+            display: 'inline-block',
+            width: '2rem',
+            cursor: 'pointer',
+          }}
+            onClick={() => setShowSettings(false)}
+          >
+            <svg viewBox='0 0 10 10' fill='none' stroke='black' strokeWidth='1.2' strokeLinecap='round'>
+              <path d='M 3 3 L 7 7' />
+              <path d='M 7 3 L 3 7' />
+            </svg>
+          </div>
+        </div>
+        <div className="setting-row">
+          <label htmlFor="duration">Spin Duration</label>
+          <input
+            style={{ accentColor: 'var(--primary)' }}
+            id="duration"
+            type="range"
+            min="6"
+            max="20"
+            value={spinValue}
+            onChange={(e) => setSpinValue(Number.parseInt(e.target.value))}
+          />
+          <span>~{spinValue} seconds</span>
         </div>
       </div>
     </div>

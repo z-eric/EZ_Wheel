@@ -2,8 +2,9 @@
  * Handles animating the Wheel component and determining the winner.
  */
 
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useImperativeHandle, useState, useContext } from "react";
 import Wheel from "./Wheel";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 interface WheelSpinnerProps {
   isActiveSetter: (active: boolean) => void,
@@ -13,6 +14,7 @@ interface WheelSpinnerProps {
 export interface WheelSpinRef { startSpin: () => void }
 
 const SPIN_DURATION = 6000;
+const WIN_DELAY = 200;
 let wedgePattern: number[];
 
 const findWinningOption = (winningDegree: number) => {
@@ -24,6 +26,7 @@ const findWinningOption = (winningDegree: number) => {
 
 const WheelSpinner = forwardRef<WheelSpinRef, WheelSpinnerProps>((props, callSpin) => {
   const { isActiveSetter, winningLocationSetter } = props;
+  const settingsContext = useContext(SettingsContext);
   
   const [rotation, setRotation] = useState(0);
 
@@ -33,9 +36,9 @@ const WheelSpinner = forwardRef<WheelSpinRef, WheelSpinnerProps>((props, callSpi
 
   const spin = () => {
     isActiveSetter(true);
-    const distance = 4000 + (800 * Math.random());
-    const duration = SPIN_DURATION * (0.2 * Math.random() + 0.9);
-    setTimeout(winningLocationSetter, SPIN_DURATION + 200, (findWinningOption((rotation + (distance * 0.5)) % 360)));
+    const distance = 4000 + (settingsContext.spinModifier * 0.8) + (800 * Math.random());
+    const duration = SPIN_DURATION + settingsContext.spinModifier * (0.2 * Math.random() + 0.9);
+    setTimeout(winningLocationSetter, duration + WIN_DELAY, (findWinningOption((rotation + (distance * 0.5)) % 360)));
 
     let timeStarted: number;
     const turn = (callTime: number) => {
@@ -53,7 +56,7 @@ const WheelSpinner = forwardRef<WheelSpinRef, WheelSpinnerProps>((props, callSpi
         
     }
     requestAnimationFrame(turn);
-    setTimeout(isActiveSetter, SPIN_DURATION + 200, false);
+    setTimeout(isActiveSetter, duration + WIN_DELAY, false);
   }
 
   useImperativeHandle(callSpin, () => ({
