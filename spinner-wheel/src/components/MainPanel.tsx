@@ -2,6 +2,7 @@ import { ReactElement, useContext, useEffect, useRef, useState } from 'react';
 import WheelSpinner, { WheelSpinRef } from './WheelSpinner';
 import LabelPanel from './LabelPanel';
 import { WheelContext } from '../contexts/WheelContext';
+import SettingsModal from './SettingsModal';
 
   
 const MainPanel = () => {
@@ -9,6 +10,7 @@ const MainPanel = () => {
   const [isActive, setIsActive] = useState(false);
   const [winningText, setWinningText] = useState('');
   const [showWinner, setShowWinner] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   const isActiveSetter = (active: boolean) => {
     setIsActive(active);
@@ -66,190 +68,202 @@ const MainPanel = () => {
   }
 
   return (
-      <div style={{ display: 'flex' }}>
-        <div className='uipanel'
-          // Wheel Panel
+    <div style={{ display: 'flex' }}>
+      {showSettings && <SettingsModal setShowSettings={setShowSettings}/>}
+      <div className='uipanel'
+        // Wheel Panel
+        style={{
+          position: 'relative',
+          width: '46rem',
+          height: '46rem',
+      }}>
+        <div // Settings button
           style={{
-            position: 'relative',
-            width: '46rem',
-            height: '46rem',
+            position: 'absolute',
+            right: '0',
+            margin: '1rem',
+            cursor: 'pointer',
+          }}
+          onClick={() => {if (!isActive) setShowSettings(true)}}
+        >
+          ⚙️
+        </div>
+        <svg viewBox='0 0 46 46'>
+          <path // bottom  block
+            stroke='black' strokeWidth='0.2' fill='var(--background)'
+            d='M 1 45
+            L 1 30
+            L 45 30
+            L 45 45
+            Z'/>
+        </svg>
+        <div style={{
+          pointerEvents: 'none',
+          overflow: 'clip',
+          position: 'absolute',
+          width: '36rem',
+          height: '36rem',
+          top: 'calc(50% - 18rem)',
+          left: 'calc(50% - 18rem)',
+        }}>
+          <WheelSpinner
+            isActiveSetter={isActiveSetter}
+            winningLocationSetter={winningLocationSetter}
+            ref={spinRef}
+          />
+        </div>
+        <svg  // Wheel frame
+          width='46rem' height='46rem'
+          viewBox='0 0 46 46'
+          fill='var(--secondary)'
+          style={{
+            pointerEvents: 'none',
+            position: 'absolute',
+            top: 'calc(50% - 23rem)',
+            left: 'calc(50% - 23rem)',
           }}
         >
-          <svg viewBox='0 0 46 46'>
-            <path // bottom  block
-              stroke='black' strokeWidth='0.2' fill='var(--background)'
-              d='M 1 45
-              L 1 30
-              L 45 30
-              L 45 45
-              Z'/></svg>
-          <div style={{
-            pointerEvents: 'none',
-            overflow: 'clip',
-            position: 'absolute',
-            width: '36rem',
-            height: '36rem',
-            top: 'calc(50% - 18rem)',
-            left: 'calc(50% - 18rem)',
-          }}>
-            <WheelSpinner
-              isActiveSetter={isActiveSetter}
-              winningLocationSetter={winningLocationSetter}
-              ref={spinRef}
+          <path id='winnerArch' fill='none' stroke='black' strokeWidth='3'
+            d='M 3.5 35
+            L 3.5 23
+            A 19.5 19.5 0 0 1 42.5 23
+            L 42.5 35'/>
+          <path fill='none' stroke='var(--background)' strokeWidth='2.5'
+            d='M 3.5 35
+            L 3.5 23
+            A 19.5 19.5 0 0 1 42.5 23
+            L 42.5 35'/>
+          {showWinner && starGenerator(25)}
+          <path  // winner panel
+            stroke={showWinner ? 'var(--highlight)' : 'black'} strokeWidth='.5'
+            d='M 12 4
+            A 22 22 0 0 1 34 4
+            A 2 2 0 0 1 32 8.5
+            A 18 18 0 0 0 14 8.5
+            A 2 2 0 0 1 12 4'
             />
-          </div>
-          <svg  // Wheel frame
-            width='46rem' height='46rem'
-            viewBox='0 0 46 46'
-            fill='var(--secondary)'
+          <text  // winner text
+            className='winner-text'
+            fill='white'
             style={{
-              pointerEvents: 'none',
-              position: 'absolute',
-              top: 'calc(50% - 23rem)',
-              left: 'calc(50% - 23rem)',
-            }}
-          >
-            <path id='winnerArch' fill='none' stroke='black' strokeWidth='3'
-              d='M 3.5 35
-              L 3.5 23
-              A 19.5 19.5 0 0 1 42.5 23
-              L 42.5 35'/>
-            <path fill='none' stroke='var(--background)' strokeWidth='2.5'
-              d='M 3.5 35
-              L 3.5 23
-              A 19.5 19.5 0 0 1 42.5 23
-              L 42.5 35'/>
-            {showWinner && starGenerator(25)}
-            <path  // winner panel
-              stroke={showWinner ? 'var(--highlight)' : 'black'} strokeWidth='.5'
-              d='M 12 4
-              A 22 22 0 0 1 34 4
-              A 2 2 0 0 1 32 8.5
-              A 18 18 0 0 0 14 8.5
-              A 2 2 0 0 1 12 4'
-              />
-            <text  // winner text
-              className='winner-text'
-              fill='white'
-              style={{
-                fontWeight: 'bold',
-                fontSize: `${winningText.length < 15 ? '20%' : '14%'}`,
-                textAlign: 'center',
-              }}>
-              <textPath href='#winnerArch' startOffset='50%' textAnchor='middle'>
-                <tspan dy='1.2'>{showWinner && winningText}</tspan>
-              </textPath>
-            </text>
-            <path // bottom left block
-              stroke='black' strokeWidth='0.2'
-              d='M 1 45
-              L 1 30
-              L 6 30
-              A 18 18 0 0 0 20 41
-              L 20 41
-              L 20 45
-              Z'/>
-            <path // bottom right block
-              stroke='black' strokeWidth='0.2'
-              d='M 45 45
-              L 45 30
-              L 40 30
-              A 18 18 0 0 1 26 41
-              L 26 45
-              Z'/>
-          </svg>
-          <svg  // Wheel pointer
-            width='16rem' height='8rem' viewBox='0 0 10 10'
-            style={{
-              position: 'absolute',
-              top: 'calc(82% - 4rem)',
-              left: 'calc(18% - 8rem)',
-              rotate: '135deg',
-              zIndex: '10',
-            }}
-          >
-            <path fill='none' stroke='white' strokeWidth='0.4'
-              d='M 0 5
-                L 7 2 
-                a 3.2 3.2 0 1 1 0 6 
-                Z'
-            />
-            <path fill='var(--highlight)' stroke='black' strokeWidth='0.15'
-              d='M 0 5
-                L 3.5 3.5
-                L 7 2 
-                L 5 5
-                L 3.5 6.5
-                Z'
-            />
-            <path fill='var(--primary)' stroke='black' strokeWidth='0.15'
-              d='M 5 5
-                L 3.5 3.5
-                L 7 2 
-                a 3.2 3.2 0 1 1 0 6
-                L 3.5 6.5
-                Z'
-            />
-          </svg>
-          <svg  // Wheel center
-            width='8rem' height='16rem'
-            viewBox='0 0 10 10'
-            fill='var(--primary)'
-            stroke='black'
-            strokeWidth='0.1'
-            style={{
-              position: 'absolute',
-              top: 'calc(50% - 8rem)',
-              left: 'calc(50% - 4rem)',
-              rotate: '225deg',
-          }}>
-            <path
-              d='M 5 -2.5
-                L 2 4 
-                a 3.2 3.2 0 1 0 6 0 
-                Z'
-            />
-          </svg>
-
-          <svg  // Spin button
-            width='14rem' height='14rem'
-            viewBox='0 0 14 14'
-            style={{
-              pointerEvents: 'auto',
-              position: 'absolute',
-              bottom: '0',
-              right: '0',
-          }}>
-            <path fill='none' stroke='white' strokeWidth='0.3'
-              d='M 7 3
-              A 2.8 5 25 0 1 12 4
-              A 9 9 0 0 1 4 12
-              A 2.8 5 -115 0 1 3 7
-              A 19 19 0 0 0 7 3'
-            />
-            <path
-              onClick={() => { !isActive && handleClickSpin() }}
-              fill={isActive ? 'var(--primary)' : 'var(--highlight)'} stroke='black' strokeWidth='0.15'
-              style={{ cursor: 'pointer' }}
-              d='M 7 3
-              A 2.8 5 25 0 1 12 4
-              A 9 9 0 0 1 4 12
-              A 2.8 5 -115 0 1 3 7
-              A 19 19 0 0 0 7 3'
-            />
-            <path fill='none' id='spinText' d='M 3 10 A 18 18 0 0 0 10 3' />
-            <text style={{
-              pointerEvents: 'none',
-              fontSize: '30%',
+              fontWeight: 'bold',
+              fontSize: `${winningText.length < 15 ? '20%' : '14%'}`,
+              textAlign: 'center',
             }}>
-              <textPath href='#spinText' startOffset='50%' textAnchor='middle'>
-                <tspan dy='1.6'>SPIN</tspan>
-              </textPath>
-            </text>
-            </svg>
-        </div>
-        <LabelPanel isActive={isActive} />
+            <textPath href='#winnerArch' startOffset='50%' textAnchor='middle'>
+              <tspan dy='1.2'>{showWinner && winningText}</tspan>
+            </textPath>
+          </text>
+          <path // bottom left block
+            stroke='black' strokeWidth='0.2'
+            d='M 1 45
+            L 1 30
+            L 6 30
+            A 18 18 0 0 0 20 41
+            L 20 41
+            L 20 45
+            Z'/>
+          <path // bottom right block
+            stroke='black' strokeWidth='0.2'
+            d='M 45 45
+            L 45 30
+            L 40 30
+            A 18 18 0 0 1 26 41
+            L 26 45
+            Z'/>
+        </svg>
+        <svg  // Wheel pointer
+          width='16rem' height='8rem' viewBox='0 0 10 10'
+          style={{
+            position: 'absolute',
+            top: 'calc(82% - 4rem)',
+            left: 'calc(18% - 8rem)',
+            rotate: '135deg',
+            zIndex: '10',
+          }}
+        >
+          <path fill='none' stroke='white' strokeWidth='0.4'
+            d='M 0 5
+              L 7 2 
+              a 3.2 3.2 0 1 1 0 6 
+              Z'
+          />
+          <path fill='var(--highlight)' stroke='black' strokeWidth='0.15'
+            d='M 0 5
+              L 3.5 3.5
+              L 7 2 
+              L 5 5
+              L 3.5 6.5
+              Z'
+          />
+          <path fill='var(--primary)' stroke='black' strokeWidth='0.15'
+            d='M 5 5
+              L 3.5 3.5
+              L 7 2 
+              a 3.2 3.2 0 1 1 0 6
+              L 3.5 6.5
+              Z'
+          />
+        </svg>
+        <svg  // Wheel center
+          width='8rem' height='16rem'
+          viewBox='0 0 10 10'
+          fill='var(--primary)'
+          stroke='black'
+          strokeWidth='0.1'
+          style={{
+            position: 'absolute',
+            top: 'calc(50% - 8rem)',
+            left: 'calc(50% - 4rem)',
+            rotate: '225deg',
+        }}>
+          <path
+            d='M 5 -2.5
+              L 2 4 
+              a 3.2 3.2 0 1 0 6 0 
+              Z'
+          />
+        </svg>
+
+        <svg  // Spin button
+          width='14rem' height='14rem'
+          viewBox='0 0 14 14'
+          style={{
+            pointerEvents: 'auto',
+            position: 'absolute',
+            bottom: '0',
+            right: '0',
+        }}>
+          <path fill='none' stroke='white' strokeWidth='0.3'
+            d='M 7 3
+            A 2.8 5 25 0 1 12 4
+            A 9 9 0 0 1 4 12
+            A 2.8 5 -115 0 1 3 7
+            A 19 19 0 0 0 7 3'
+          />
+          <path
+            onClick={() => { !isActive && handleClickSpin() }}
+            fill={isActive ? 'var(--primary)' : 'var(--highlight)'} stroke='black' strokeWidth='0.15'
+            style={{ cursor: 'pointer' }}
+            d='M 7 3
+            A 2.8 5 25 0 1 12 4
+            A 9 9 0 0 1 4 12
+            A 2.8 5 -115 0 1 3 7
+            A 19 19 0 0 0 7 3'
+          />
+          <path fill='none' id='spinText' d='M 3 10 A 18 18 0 0 0 10 3' />
+          <text style={{
+            pointerEvents: 'none',
+            fontSize: '30%',
+          }}>
+            <textPath href='#spinText' startOffset='50%' textAnchor='middle'>
+              <tspan dy='1.6'>SPIN</tspan>
+            </textPath>
+          </text>
+        </svg>
       </div>
+      <LabelPanel isActive={isActive} />
+    </div>
   );
 }
 

@@ -92,6 +92,7 @@ const LabelPanel = memo(({isActive}: LabelPanelProps) => {
   }
   const handleAddDelete = (index: number) => {
     if (isActive) return; //locks inputs while spinning
+    setShowColorPicker(false);
     if (index === -1) {
       if (newOption.label !== '' // don't add blank
         && wheelContext.data.length < MAX_INPUTS) {
