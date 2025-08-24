@@ -1,8 +1,12 @@
+import { useContext } from "react";
+import { SettingsContext } from "../contexts/SettingsContext";
+
 interface SettingsModalProps {
   setShowSettings: (value: boolean) => void
 }
 
 const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
+  const settingsContext = useContext(SettingsContext);
 
   return (
     <div style={{
@@ -24,6 +28,7 @@ const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
       }}>
         <div onClick={() => setShowSettings(false)}>
           💀
+          {settingsContext.spinModifier}
         </div>
       </div>
     </div>
