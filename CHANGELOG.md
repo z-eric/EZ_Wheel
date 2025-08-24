@@ -1,6 +1,8 @@
-# 1.X.X
+# 1.0.2
 
-- Color picker is closed if open when adding or deleting an option.
+- Added settings modal.
+- Added spin duration setting.
+- Color picker will close if open when add or delete occurs.
 
 # 1.0.1
 

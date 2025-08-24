@@ -18,7 +18,7 @@ Big wedges aren't dramatic, gotta have little wedges.
 [x] Built in theme options.  
 [ ] Fully custom theme slot.
 ~~[ ] Pointer "push back" simulation.~~  
-[ ] Settings (duration/toggle/speed/etc).
+[x] Settings (duration/toggle/speed/etc).
 
 ## Things I learned
 - Implementing memo to prevent the wheel from re-rendering while animating.

@@ -13,6 +13,10 @@ const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
     settingsContext.setSpinModifier((spinValue - 6) * 1000);
   })
 
+  // const handleResetAll = () => {
+  //   setSpinValue(6);
+  // }
+
   return (
     <div style={{
       zIndex: '100',
@@ -22,6 +26,10 @@ const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
       height: '100%',
       background: '#fff8',
     }}>
+      <div // Close when clicking outside the modal dialog
+        style={{ width: '100%', height: '100%' }}
+        onClick={() => setShowSettings(false)}
+      />
       <div className="uipanel"
         style={{
           position: 'fixed',
@@ -32,8 +40,11 @@ const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
           boxShadow: '0.3rem 0.3rem 1rem #000',
       }}>
         <div style={{display: 'flex', margin: '0.5rem 0.5rem 0 1rem'}}>
-          <div style={{flexGrow: '1'}}><b>Settings</b></div>
-          <div style={{
+          <div style={{ flexGrow: '1' }}>
+            <b>Settings</b>
+          </div>
+          <div // Close button
+            style={{
             display: 'inline-block',
             width: '2rem',
             cursor: 'pointer',
@@ -59,6 +70,11 @@ const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
           />
           <span>~{spinValue} seconds</span>
         </div>
+        {/* <div className="setting-row">
+          <label>Reset All</label>
+          <input type="button" value="Reset all settings to default" onClick={handleResetAll}/>
+          <span/>
+        </div> */}
       </div>
     </div>
   )
