@@ -10,6 +10,7 @@ import Wedge from './Wedge';
 import { WheelContext, WheelOption } from '../contexts/WheelContext';
 import { Theme } from '../themes/themes';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { SettingsContext } from '../contexts/SettingsContext';
 
 interface WheelProps {
   sendWedgePattern: (pattern: number[]) => void;
@@ -23,7 +24,10 @@ let wedgePattern: number[] = [];
  * the provided weights. Algorithm attempts to minimize clumping
  * of repeated wedges.
  */
-const calcWedgePattern = (wheelData : WheelOption[]) => {
+const calcWedgePattern = (
+  wheelData: WheelOption[],
+  densityThreshold: { amount: number, enabled: boolean },
+) => {
   // console.clear();
   
   let totalWedges = 0; // The weights of all options added together.
@@ -35,7 +39,8 @@ const calcWedgePattern = (wheelData : WheelOption[]) => {
   }
 
   // console.log('totalWedges ' + totalWedges + ' maxDepth ' + maxDepth);
-  wedgePattern = new Array(totalWedges);
+
+  wedgePattern = new Array(totalWedges); // This needs to be pre-sized for the logic to work.
 
   /* Iterate by "depth" first, assigning a wedge to every option before
     assigning any option a second wedge. Then any wedges that get a second
@@ -67,11 +72,21 @@ const calcWedgePattern = (wheelData : WheelOption[]) => {
     }
   }
 
-  /* Go around the wheel twice checking for adjacent duplicates and swapping
+  /* In the interest of small wedges, if the enabled, repeat the calculated pattern
+    until the total number of wedges is over the minimum threshold. */
+  if (densityThreshold.enabled && totalWedges < densityThreshold.amount) {
+    let newPattern = [];
+    while (newPattern.length < densityThreshold.amount){
+      newPattern.push(...wedgePattern);
+    }
+    wedgePattern = newPattern;
+  }
+
+  /* Go around the wheel thrice checking for adjacent duplicates and swapping
     them if the previous is not also the same thing. n iterations seems to
     solve adjacency of up to n+1 except in cases of extreme imbalance. 
     As an option weight approaches half the weight total adjacency becomes unavoidable. */
-  for (let current = 0, limit = 0; limit < wedgePattern.length * 2; current++, limit++){
+  for (let current = 0, limit = 0; limit < wedgePattern.length * 3; current++, limit++){
     current = current % wedgePattern.length; // stay within array bounds
     let prev = current === 0 ? wedgePattern.length - 1 : current - 1; // set prev accounting for wrap around
     let next = current === wedgePattern.length - 1 ? 0 : current + 1; // set next accounting for wrap around
@@ -128,8 +143,9 @@ const buildWedges = (wheelData: WheelOption[], wheelRadius: number, theme: Theme
 const Wheel = memo(({sendWedgePattern} : WheelProps) => {
   const wheelContext = useContext(WheelContext);
   const themeContext = useContext(ThemeContext);
+  const settingsContext = useContext(SettingsContext);
 
-  calcWedgePattern(wheelContext.data);
+  calcWedgePattern(wheelContext.data, settingsContext.densityThreshold);
   sendWedgePattern(wedgePattern);
 
   return (

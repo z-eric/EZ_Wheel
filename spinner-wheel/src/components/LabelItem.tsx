@@ -86,6 +86,7 @@ const LabelItem = ({ wheelOption, index, handleLabel, handleWeight, handleColor,
         title={`${index === -1 ? 'Add (or press enter)' : 'Delete'}`}
         className='label-input'
         style={{
+          backgroundColor: 'white',
           display: 'inline-block',
           width: '2rem',
           textAlign: 'center',
