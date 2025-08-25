@@ -3,21 +3,21 @@ Because I didn't like any that were out there, I made another!
 Big wedges aren't dramatic, gotta have little wedges.  
 
 ## MVP Features
-[x] Multiple wedges automatically created based on weights.  
-[x] Duplicate wedges distributed amongst each other with minimal clumping.  
-[x] Labels remembered between visits.  
-[x] Unique colors for each wedge group.  
+✅ Multiple wedges automatically created based on weights.  
+✅ Duplicate wedges distributed amongst each other with minimal clumping.  
+✅ Labels remembered between visits.  
+✅ Unique colors for each wedge group.  
 
 ### Extended Features
-[x] Automatic upscaling when total weights are low. (minimum wedge density)  
-[x] No adjacent duplicates (for most cases).  
-[ ] No adjacent duplicates (at all! (except when not enough others)).  
-[ ] Wheel scaling with viewport.  
-[ ] Mobile friendly.  
-[x] Customizable wedge colors.  
-[x] Built in theme options.  
-[ ] Fully custom theme slot.  
-[x] Settings (duration/toggle/speed/etc).
+✅ Automatic upscaling when total weights are low. (minimum wedge density)  
+✅ No adjacent duplicates (for most cases).  
+🔘 No adjacent duplicates (at all! (except when not enough others)).  
+🔘 Wheel scaling with viewport.  
+🔘 Mobile friendly.  
+✅ Customizable wedge colors.  
+✅ Built in theme options.  
+🔘 Fully custom theme slot.  
+✅ Settings (duration/toggle/speed/etc).
 
 ## Things I learned
 - Implementing memo to prevent the wheel from re-rendering while animating.
