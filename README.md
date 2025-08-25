@@ -9,7 +9,7 @@ Big wedges aren't dramatic, gotta have little wedges.
 [x] Unique colors for each wedge group.  
 
 ### Extended Features
-[ ] Automatic upscaling when total weights are low. (minimum wedge density)  
+[x] Automatic upscaling when total weights are low. (minimum wedge density)  
 [x] No adjacent duplicates (for most cases).  
 [ ] No adjacent duplicates (at all! (except when not enough others)).  
 [ ] Wheel scaling with viewport.  

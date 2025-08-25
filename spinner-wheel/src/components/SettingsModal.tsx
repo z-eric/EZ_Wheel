@@ -13,9 +13,10 @@ const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
     settingsContext.setSpinModifier((spinValue - 6) * 1000);
   })
 
-  // const handleResetAll = () => {
-  //   setSpinValue(6);
-  // }
+  const handleResetAll = () => {
+    setSpinValue(6);
+    settingsContext.setDensityThreshold({ amount: 20, enabled: true });
+  }
 
   return (
     <div style={{
@@ -70,11 +71,46 @@ const SettingsModal = ({ setShowSettings }: SettingsModalProps) => {
           />
           <span>~{spinValue} seconds</span>
         </div>
-        {/* <div className="setting-row">
+        <div className="setting-row">
+          <label htmlFor="density">Minimum Wedges</label>
+          <input
+            style={{ accentColor: 'var(--primary)' }}
+            id="density"
+            type="range"
+            min="10"
+            max="30"
+            value={settingsContext.densityThreshold.amount}
+            onChange={(e) => settingsContext.setDensityThreshold(
+              {
+                ...settingsContext.densityThreshold,
+                amount: Number.parseInt(e.target.value),
+              }
+            )}
+          />
+          <span>{settingsContext.densityThreshold.amount} wedges</span>
+        </div>
+        <div className="setting-row">
+          <label htmlFor="densityToggle">Minimum Wedges</label>
+          <input
+            style={{ accentColor: 'var(--primary)' }}
+            id="densityToggle"
+            type="checkbox"
+            checked={settingsContext.densityThreshold.enabled}
+            onChange={(e) => settingsContext.setDensityThreshold(
+              {
+                ...settingsContext.densityThreshold,
+                enabled: e.target.checked,
+              }
+            )}
+          />
+          <span>{settingsContext.densityThreshold.enabled ? 'ON' : 'OFF'}</span>
+        </div>
+        <br/>
+        <div className="setting-row">
           <label>Reset All</label>
           <input type="button" value="Reset all settings to default" onClick={handleResetAll}/>
           <span/>
-        </div> */}
+        </div>
       </div>
     </div>
   )
