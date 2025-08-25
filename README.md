@@ -16,8 +16,7 @@ Big wedges aren't dramatic, gotta have little wedges.
 [ ] Mobile friendly.  
 [x] Customizable wedge colors.  
 [x] Built in theme options.  
-[ ] Fully custom theme slot.
-~~[ ] Pointer "push back" simulation.~~  
+[ ] Fully custom theme slot.  
 [x] Settings (duration/toggle/speed/etc).
 
 ## Things I learned
